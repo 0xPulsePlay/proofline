@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-07-19T16:26:14.539Z",
+  "cluster": "mainnet-beta",
+  "rpc": {
+    "primary": "https://api.mainnet-beta.solana.com",
+    "finalizedReadback": "https://solana-rpc.publicnode.com"
+  },
+  "program": {
+    "id": "PRF5wS3RSArKNCC2pYtDvBciM9KxtDw6tqAUzimKqbN",
+    "programDataAddress": "CA6puvrjgT5JACWRVFnCXAMVurNrziE8u6zfZbFGBvC8",
+    "executable": true,
+    "upgradeAuthority": "Cd5i4a2ydUY8xBVcGWLtdumvPPwfEeyMyXX8ZacLCyMP",
+    "soBytes": 339128,
+    "soSha256": "15271185dc3356325834fcf36c15c430b7653e91f8780fefc260274758b4b2e8",
+    "maxLen": 339128
+  },
+  "transactions": {
+    "deploy": {
+      "signature": "yz5tVxrb8ddBZsPaSZQVWQaShcDRPjjc574GxF9g5kV1idFeRLVs9hAqALnR8h8ios1j5uxsvaDkYmyWVBcdUHF",
+      "slot": 433929461
+    },
+    "initializeConfig": {
+      "signature": "4Hq3mmXAemf2u951FAJDvckkxpTq6vHDPexK8TbYzqevmjpL2SsHEwtDRodMi7VU7sfGJiSPtZ61xSYjyyczbRz4",
+      "slot": 433929501
+    },
+    "verifyOutcome": {
+      "signature": "39WXYxtkwURZ4vhL6ZiCtNJiqGrnjQFi78SohuwPqLS8RK9sD39vieCeHuQ94pSjjwBAXt4g91MQkwVNxDo6eh1K",
+      "slot": 433929535,
+      "computeUnitLimit": 1400000,
+      "computeUnitPriceMicroLamports": 10000,
+      "computeUnitsConsumed": 264323,
+      "txlineCpiObserved": true,
+      "txlineReturnBase64": "AQ=="
+    }
+  },
+  "accounts": {
+    "configPda": "E25Qkfodjr8mf84uxK4Gcywsf87Fw7qDrcLCo7rdVBi",
+    "verifiedOutcomePda": "7Lx6G4d7stCQxHQZ796STyTRCpZ4Yfq9852K23FatamV",
+    "dailyRoot": "CdrFdcGqLpGxq3qDxcj4aNQT8jsUU2vBHd3JEEAQ55jd",
+    "txlineProgram": "9ExbZjAapQww1vfcisDmrngPinHTEfpjYRWMunJgcKaA"
+  },
+  "verifiedOutcome": {
+    "fixtureId": "18175918",
+    "proofTimestampMs": "1783126172907",
+    "participant1Score": 3,
+    "participant2Score": 2,
+    "period": 100,
+    "result": 1,
+    "sourceValidationVersion": 2,
+    "destinationChain": 30,
+    "proofBundleHash": "9c6d8e556af729624f3c082d8c1a99d509c37f5f1c5f701f2d0d3f96b309b2c9",
+    "validationInstructionHash": "cd4418d1c7a29b3153ce2a7dd54b66616a80ad80b1f2ed419c7e69b938891f79",
+    "verifiedSlot": "433929535",
+    "published": false,
+    "providerSequencePresent": false
+  },
+  "balance": {
+    "preDeployLamports": 3228779032,
+    "finalLamports": 859780825,
+    "spentLamports": 2368998207
+  },
+  "rent": {
+    "programLamports": 1141440,
+    "programDataLamports": 2361534960,
+    "configLamports": 1865280,
+    "verifiedOutcomeLamports": 2630880,
+    "totalLamports": 2367172560
+  },
+  "finalizedReadbackSlots": {
+    "program": 433929535,
+    "programData": 433929535,
+    "config": 433929535,
+    "verifiedOutcome": 433929535
+  },
+  "explorer": {
+    "deploy": "https://explorer.solana.com/tx/yz5tVxrb8ddBZsPaSZQVWQaShcDRPjjc574GxF9g5kV1idFeRLVs9hAqALnR8h8ios1j5uxsvaDkYmyWVBcdUHF",
+    "initializeConfig": "https://explorer.solana.com/tx/4Hq3mmXAemf2u951FAJDvckkxpTq6vHDPexK8TbYzqevmjpL2SsHEwtDRodMi7VU7sfGJiSPtZ61xSYjyyczbRz4",
+    "verifyOutcome": "https://explorer.solana.com/tx/39WXYxtkwURZ4vhL6ZiCtNJiqGrnjQFi78SohuwPqLS8RK9sD39vieCeHuQ94pSjjwBAXt4g91MQkwVNxDo6eh1K",
+    "program": "https://explorer.solana.com/address/PRF5wS3RSArKNCC2pYtDvBciM9KxtDw6tqAUzimKqbN",
+    "verifiedOutcome": "https://explorer.solana.com/address/7Lx6G4d7stCQxHQZ796STyTRCpZ4Yfq9852K23FatamV"
+  }
+}

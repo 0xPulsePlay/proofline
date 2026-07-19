@@ -69,8 +69,28 @@ function Hex({ value }: { value: string }) {
   );
 }
 
+interface D2Evidence {
+  program: { id: string; soBytes: number; upgradeAuthority: string };
+  transactions: {
+    deploy: { signature: string; slot: number };
+    verifyOutcome: { signature: string; slot: number; computeUnitsConsumed: number | null; txlineReturnBase64: string };
+  };
+  accounts: { verifiedOutcomePda: string; dailyRoot: string; txlineProgram: string };
+  verifiedOutcome: {
+    fixtureId: string;
+    participant1Score: number;
+    participant2Score: number;
+    period: number;
+    result: number;
+    proofBundleHash: string;
+    validationInstructionHash: string;
+  };
+  explorer: { deploy: string; verifyOutcome: string; program: string; verifiedOutcome: string };
+}
+
 export default function MainnetPage() {
   const [runs, setRuns] = useState<RunEntry[]>([]);
+  const [d2, setD2] = useState<D2Evidence | null>(null);
   const [data, setData] = useState<
     Record<string, { manifest: Manifest; memo?: MemoPreview; broadcast?: Broadcast }>
   >({});
@@ -98,6 +118,10 @@ export default function MainnetPage() {
         setData(out);
       })
       .catch(() => setRuns([]));
+    fetch("/mainnet/d2-mainnet.json")
+      .then((r) => (r.ok ? r.json() : null))
+      .then(setD2)
+      .catch(() => setD2(null));
   }, []);
 
   return (
@@ -130,6 +154,41 @@ export default function MainnetPage() {
         </p>
       </div>
 
+      {d2 && (
+        <div className="panel" style={{ marginTop: 12, maxWidth: 860 }}>
+          <h3>
+            Deployed program — ON-CHAIN verification{" "}
+            <span className="chip ok" style={{ fontSize: 10, marginLeft: 8 }}>SOLANA MAINNET</span>
+          </h3>
+          <p className="small dim" style={{ margin: "6px 0 10px" }}>
+            The Proofline adapter program is <strong style={{ color: "var(--text)" }}>deployed on
+            Solana mainnet</strong> and executed <code className="mono">verify_outcome</code> as a
+            real transaction: a CPI into the deployed TxLINE program verified the Merkle proof
+            against the real mainnet daily root and returned exact <code className="mono">true</code> —
+            this leg IS on-chain verification, distinct from the memo path below.
+          </p>
+          <div className="tiny mono">
+            program <a href={d2.explorer.program} target="_blank" rel="noreferrer">{d2.program.id}</a> ({d2.program.soBytes} bytes)
+            <br />
+            verify_outcome tx{" "}
+            <a href={d2.explorer.verifyOutcome} target="_blank" rel="noreferrer">
+              {d2.transactions.verifyOutcome.signature.slice(0, 20)}…
+            </a>{" "}
+            · slot {d2.transactions.verifyOutcome.slot} · {d2.transactions.verifyOutcome.computeUnitsConsumed} CU · TxLINE return{" "}
+            <span className="chip ok" style={{ fontSize: 10 }}>true</span>
+            <br />
+            VerifiedOutcome PDA{" "}
+            <a href={d2.explorer.verifiedOutcome} target="_blank" rel="noreferrer">
+              {d2.accounts.verifiedOutcomePda.slice(0, 20)}…
+            </a>{" "}
+            → fixture {d2.verifiedOutcome.fixtureId}, {d2.verifiedOutcome.participant1Score}–{d2.verifiedOutcome.participant2Score}, period{" "}
+            {d2.verifiedOutcome.period}, all fields derived from the verified bytes
+            <br />
+            bundle <Hex value={`0x${d2.verifiedOutcome.proofBundleHash}`} /> · instruction{" "}
+            <Hex value={`0x${d2.verifiedOutcome.validationInstructionHash}`} />
+          </div>
+        </div>
+      )}
       {runs.length === 0 && (
         <div className="panel" style={{ marginTop: 12 }}>
           <p className="small dim">No mainnet evidence bundles published yet.</p>
