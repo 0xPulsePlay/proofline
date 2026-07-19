@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Legend } from "@/components/Legend";
+import { Nav, HonestyFooter } from "@/components/chrome";
 
 export const metadata: Metadata = {
-  title: "Proofline — Finality Control Room",
+  title: "Proofline — proven once, settled everywhere",
   description:
-    "Sports results, proven once. Settled everywhere. TxLINE → Solana → Wormhole → Chainlink CRE → Base.",
+    "Oracle-attested match-outcome settlement: TxLINE proofs verified on Solana, carried by Wormhole, finalized on Base — two lanes, one digest.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <Nav />
         {children}
-        <Legend />
+        <HonestyFooter />
       </body>
     </html>
   );

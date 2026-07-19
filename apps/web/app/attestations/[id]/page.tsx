@@ -1,11 +1,17 @@
 /**
- * Attestation detail — payload fields, BOTH independent derivation paths,
- * explorer links. Data source: the bundled demo run (real protocol math).
+ * Attestation dossier — the digest itself is the hero: it crystallizes out
+ * of noise, then is dissected (payload, committed hashes) and shown as the
+ * junction where the two independent derivation lanes agree.
+ * Data source: the bundled demo run (real protocol math).
  */
 import Link from "next/link";
 import { decodeMatchOutcomeV1 } from "@proofline/protocol";
 import { demoManifest, deployment, explorerAddress, vector, shortHex } from "@/lib/demo-data";
-import { CopyHex } from "@/components/CopyHex";
+import { Hex, Plate, PlateHead, SectionIndex, Reveal, StampReal, StampSim } from "@/components/chrome";
+import { DigestResolve } from "@/components/viz/DigestResolve";
+import { LaneFork } from "@/components/viz/LaneFork";
+import { ByteDissect, MATCH_OUTCOME_FIELDS } from "@/components/viz/ByteDissect";
+import { IconExternal } from "@/components/icons";
 
 export default async function AttestationPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -14,28 +20,20 @@ export default async function AttestationPage({ params }: { params: Promise<{ id
 
   return (
     <div className="shell">
-      <div className="topbar">
-        <Link href="/" className="brand">PROOF<span>LINE</span></Link>
-        <span className="small dim">Attestation detail</span>
-        <div className="spacer" />
-        <nav className="small navlinks">
-          <Link href="/control-room">Control room</Link>
-          <Link href="/tamper-lab">Tamper lab</Link>
-          <Link href="/integrations">Integrations</Link>
-        </nav>
-      </div>
-
       {!known || !d ? (
-        <div className="panel mt-4">
-          <h3>Unknown attestation</h3>
-          <p className="small dim">
-            <span className="mono">{id}</span> is not part of the bundled demo data. The demo run&apos;s
-            attestation is{" "}
-            <Link className="mono" href={`/attestations/${demoManifest.attestationId}`}>
-              {shortHex(demoManifest.attestationId)}
-            </Link>.
-          </p>
-        </div>
+        <section style={{ padding: "46px 0 0" }}>
+          <Plate>
+            <PlateHead title="Unknown attestation" />
+            <p className="small dim m-0">
+              <span className="mono">{id}</span> is not part of the bundled demo data. The demo
+              run&apos;s attestation is{" "}
+              <Link className="mono" href={`/attestations/${demoManifest.attestationId}`}>
+                {shortHex(demoManifest.attestationId)}
+              </Link>
+              .
+            </p>
+          </Plate>
+        </section>
       ) : (
         <AttestationDetail />
       )}
@@ -53,18 +51,23 @@ function AttestationDetail() {
     return out;
   })();
   const o = decodeMatchOutcomeV1(payloadBytes);
-  const resultName = o.result === 1 ? "HOME (Canada)" : o.result === 2 ? "DRAW" : "AWAY (France)";
 
-  const payloadRows: [string, string][] = [
-    ["magic / version / type", "PRFL · v1 · MATCH_OUTCOME"],
-    ["fixture id", String(o.fixtureId)],
-    ["result", `${o.result} — ${resultName}`],
-    ["score", `${o.participant1Score}–${o.participant2Score} (period ${o.period})`],
-    ["score sequence", String(o.scoreSequence)],
-    ["proof timestamp", new Date(Number(o.proofTimestampMs)).toISOString()],
-    ["destination chain", `${o.destinationChain} (Base Sepolia, Wormhole numbering)`],
-    ["source validation", `validate_stat_v${o.sourceValidationVersion}`],
-  ];
+  const dissectFields = MATCH_OUTCOME_FIELDS({
+    flags: o.flags,
+    destinationChain: o.destinationChain,
+    sourceValidationVersion: o.sourceValidationVersion,
+    result: o.result,
+    fixtureId: o.fixtureId,
+    scoreSequence: o.scoreSequence,
+    proofTimestampMs: o.proofTimestampMs,
+    period: o.period,
+    participant1Score: o.participant1Score,
+    participant2Score: o.participant2Score,
+    txlineProgramId: o.txlineProgramId,
+    dailyRootAccount: o.dailyRootAccount,
+    validationInstructionHash: o.validationInstructionHash,
+    proofBundleHash: o.proofBundleHash,
+  });
   const hashRows: [string, string][] = [
     ["txline program id", o.txlineProgramId],
     ["daily root account", o.dailyRootAccount],
@@ -77,96 +80,135 @@ function AttestationDetail() {
 
   return (
     <>
-      <div className="scoreline">
-        <span className="teams sub">
-          {f.participant1} <span className="score">{f.participant1Score}</span>
-          <span className="dim"> — </span>
-          <span className="score">{f.participant2Score}</span> {f.participant2}
-        </span>
-        <span className="final-tag">FINAL</span>
-        {f.synthetic && <span className="badge-sim">synthetic fixture</span>}
-      </div>
-      <div className="panel">
-        <h3>Attestation id</h3>
-        <div className="mono small hexwrap">
-          <CopyHex value={d.attestationId} head={20} tail={12} label="attestation id" />
-        </div>
-        <p className="tiny faint mt-2">
-          keccak256(domainSeparator ‖ sourceEmitter ‖ fixtureId ‖ scoreSequence ‖
-          validationInstructionHash ‖ proofBundleHash) — conformance-asserted against{" "}
-          <span className="mono">match-outcome-v1.json</span> (vector value{" "}
-          <span className="mono">{shortHex(vector.attestationId)}</span>).
-        </p>
+      <section style={{ padding: "30px 0 0" }}>
+        <Reveal>
+          <div className="kicker mb-2">ATTESTATION DOSSIER</div>
+          <div className="score-hero">
+            <span className="teams" style={{ fontSize: "clamp(18px, 3vw, 26px)" }}>
+              {f.participant1} <span className="num">{f.participant1Score}</span>
+              <span className="vs"> — </span>
+              <span className="num">{f.participant2Score}</span> {f.participant2}
+            </span>
+            <span className="final-tag">FINAL</span>
+            {f.synthetic && <StampSim>synthetic fixture</StampSim>}
+          </div>
+          <h1
+            className="mono mt-3 hexwrap"
+            style={{ fontSize: "clamp(15px, 2.6vw, 22px)", fontWeight: 650, letterSpacing: "0.02em", color: "var(--sol)" }}
+          >
+            <DigestResolve value={d.attestationId} speed={14} />
+          </h1>
+        </Reveal>
+      </section>
+
+      <div className="sec">
+        <SectionIndex no="01" title="How the id is derived" />
+        <Reveal>
+          <Plate>
+            <div className="codeblock tiny">
+              keccak256(domainSeparator ‖ sourceEmitter ‖ fixtureId ‖ scoreSequence ‖
+              validationInstructionHash ‖ proofBundleHash)
+            </div>
+            <p className="tiny faint mt-2 m-0">
+              Conformance-asserted against <span className="mono">match-outcome-v1.json</span>{" "}
+              (vector value <span className="mono">{shortHex(vector.attestationId)}</span>). The
+              same value is derived independently by both finality lanes, on-chain.
+            </p>
+          </Plate>
+        </Reveal>
       </div>
 
-      <div className="two-col mt-4">
-        <div className="panel">
-          <h3>Payload — MatchOutcomeV1 (176 bytes, REAL)</h3>
-          <table className="data"><tbody>
-            {payloadRows.map(([k, v]) => (
-              <tr key={k}><td className="dim nowrap">{k}</td><td className="mono">{v}</td></tr>
-            ))}
-          </tbody></table>
-          <div className="mt-2">
-            <span className="tiny faint">encoded payload </span>
-            <CopyHex value={d.payloadHex} head={18} label="payload hex" />
-          </div>
-        </div>
-        <div className="panel">
-          <h3>Committed hashes</h3>
-          <dl className="kv">
-            {hashRows.map(([k, v]) => (
-              <div key={k} className="contents">
-                <dt>{k}</dt>
-                <dd>{v.startsWith("0x") ? <CopyHex value={v} label={k} /> : v}</dd>
+      <div className="sec">
+        <SectionIndex no="02" title="Dissection — the bytes that were attested" />
+        <div className="grid-2">
+          <Reveal>
+            <Plate>
+              <PlateHead kicker="PAYLOAD" title="MatchOutcomeV1 — 176 bytes">
+                <StampReal />
+              </PlateHead>
+              <p className="tiny faint mt-0 mb-2">
+                Every field owns its exact byte range — hover a row to light its bytes.
+                Destination chain uses Wormhole numbering.
+              </p>
+              <ByteDissect payloadHex={d.payloadHex} fields={dissectFields} />
+              <div className="mt-2">
+                <span className="tiny faint">encoded payload </span>
+                <Hex value={d.payloadHex} head={18} label="payload hex" />
               </div>
-            ))}
-          </dl>
+            </Plate>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <Plate>
+              <PlateHead kicker="COMMITMENTS" title="Bound hashes" />
+              <dl className="kv">
+                {hashRows.map(([k, v]) => (
+                  <div className="row" key={k}>
+                    <dt>{k}</dt>
+                    <dd>{v.startsWith("0x") ? <Hex value={v} label={k} /> : v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Plate>
+          </Reveal>
         </div>
       </div>
 
-      <div className="panel mt-4">
-        <h3>Two independent derivation paths — the dual-finality trick</h3>
-        <div className="two-col">
-          <div className="inset">
-            <div className="small"><strong>Level 3 — fast lane</strong> <span className="badge-sim">simulated leg</span></div>
-            <p className="tiny dim mt-2">
-              Three independent RPC providers simulate the TxOracle validation; the CRE workflow
-              reports the outcome to{" "}
-              <a href={explorerAddress(deployment.contracts.creLevel3Receiver)} target="_blank" rel="noreferrer" className="mono">
-                CRELevel3Receiver ↗
-              </a>
-              , which derives the attestation id on-chain from the report fields.
-            </p>
-          </div>
-          <div className="inset">
-            <div className="small"><strong>Level 4 — proof lane</strong> <span className="chip ok sm">real math</span></div>
-            <p className="tiny dim mt-2">
-              The signed VAA ({d.guardianIndices?.length ?? 13} dev-guardian signatures) is delivered to{" "}
-              <a href={explorerAddress(deployment.contracts.wormholeOutcomeReceiver)} target="_blank" rel="noreferrer" className="mono">
-                WormholeOutcomeReceiver ↗
-              </a>
-              , which verifies signatures via{" "}
-              <a href={explorerAddress(deployment.contracts.wormholeCore)} target="_blank" rel="noreferrer" className="mono">
-                WormholeCore ↗
+      <div className="sec">
+        <SectionIndex no="03" title="Two independent derivation paths — the dual-finality trick" />
+        <Reveal>
+          <Plate>
+            <div style={{ overflowX: "auto" }}>
+              <LaneFork fastLabel="LEVEL 3 · FAST LANE" proofLabel="LEVEL 4 · PROOF LANE" />
+            </div>
+            <div className="grid-2 mt-3">
+              <div>
+                <div className="row mb-1">
+                  <strong className="small">Level 3 — fast lane</strong>
+                  <StampSim>simulated leg</StampSim>
+                </div>
+                <p className="tiny dim m-0">
+                  Three independent RPC providers simulate the TxOracle validation; the CRE workflow
+                  reports the outcome to{" "}
+                  <a href={explorerAddress(deployment.contracts.creLevel3Receiver)} target="_blank" rel="noreferrer" className="mono">
+                    CRELevel3Receiver <IconExternal size={11} style={{ verticalAlign: "-1px" }} />
+                  </a>
+                  , which derives the attestation id on-chain from the report fields.
+                </p>
+              </div>
+              <div>
+                <div className="row mb-1">
+                  <strong className="small">Level 4 — proof lane</strong>
+                  <StampReal>real math</StampReal>
+                </div>
+                <p className="tiny dim m-0">
+                  The signed VAA ({d.guardianIndices?.length ?? 13} dev-guardian signatures) is
+                  delivered to{" "}
+                  <a href={explorerAddress(deployment.contracts.wormholeOutcomeReceiver)} target="_blank" rel="noreferrer" className="mono">
+                    WormholeOutcomeReceiver <IconExternal size={11} style={{ verticalAlign: "-1px" }} />
+                  </a>
+                  , which verifies signatures via{" "}
+                  <a href={explorerAddress(deployment.contracts.wormholeCore)} target="_blank" rel="noreferrer" className="mono">
+                    WormholeCore <IconExternal size={11} style={{ verticalAlign: "-1px" }} />
+                  </a>{" "}
+                  and independently derives the same attestation id from the payload + emitter.
+                </p>
+              </div>
+            </div>
+            <p className="small mt-3 mb-0 text-ok">
+              Digest equality of the two derivations is exactly what{" "}
+              <a href={explorerAddress(deployment.contracts.finalityRegistry)} target="_blank" rel="noreferrer" className="mono">
+                FinalityRegistry <IconExternal size={11} style={{ verticalAlign: "-1px" }} />
               </a>{" "}
-              and independently derives the same attestation id from the payload + emitter.
+              requires for DUAL FINALIZED.
             </p>
-          </div>
-        </div>
-        <p className="small mt-3 text-ok">
-          Digest equality of the two derivations is exactly what{" "}
-          <a href={explorerAddress(deployment.contracts.finalityRegistry)} target="_blank" rel="noreferrer" className="mono">
-            FinalityRegistry ↗
-          </a>{" "}
-          requires for DUAL FINALIZED.
+          </Plate>
+        </Reveal>
+        <p className="small mt-4">
+          <Link href={`/matches/${f.fixtureId}`}>← match dossier</Link>
+          <span className="dim"> · </span>
+          <Link href="/control-room">watch the run in the control room →</Link>
         </p>
       </div>
-      <p className="small mt-4">
-        <Link href={`/matches/${f.fixtureId}`}>← match timeline</Link>
-        <span className="dim"> · </span>
-        <Link href="/control-room">watch the run in the control room →</Link>
-      </p>
     </>
   );
 }

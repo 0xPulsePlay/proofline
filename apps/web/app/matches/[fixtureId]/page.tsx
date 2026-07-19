@@ -1,8 +1,13 @@
 /**
- * Match view — fixture record timeline → outcome, from the bundled demo data.
+ * Match dossier — the fixture's TxLINE record spine: a deterministic
+ * recording timeline that seals itself, then the commitment and the
+ * outcome on Base. Data source: the bundled demo run (real protocol math).
  */
 import Link from "next/link";
 import { demoFixtureFile, demoManifest, deployment, explorerAddress, shortHex } from "@/lib/demo-data";
+import { Plate, PlateHead, SectionIndex, Reveal, StampReal, StampSim } from "@/components/chrome";
+import { RecordSpine } from "@/components/viz/RecordSpine";
+import { IconExternal } from "@/components/icons";
 
 export default async function MatchPage({ params }: { params: Promise<{ fixtureId: string }> }) {
   const { fixtureId } = await params;
@@ -12,96 +17,116 @@ export default async function MatchPage({ params }: { params: Promise<{ fixtureI
 
   return (
     <div className="shell">
-      <div className="topbar">
-        <Link href="/" className="brand">PROOF<span>LINE</span></Link>
-        <span className="small dim">Match view</span>
-        <div className="spacer" />
-        <nav className="small navlinks">
-          <Link href="/control-room">Control room</Link>
-          <Link href="/tamper-lab">Tamper lab</Link>
-          <Link href="/integrations">Integrations</Link>
-        </nav>
-      </div>
-
       {!known ? (
-        <div className="panel mt-4">
-          <h3>Unknown fixture</h3>
-          <p className="small dim">
-            Fixture <span className="mono">{fixtureId}</span> is not part of the bundled demo data.
-            Try <Link className="mono" href={`/matches/${fx.fixtureId}`}>{fx.fixtureId}</Link>.
-          </p>
-        </div>
+        <section style={{ padding: "46px 0 0" }}>
+          <Plate>
+            <PlateHead title="Unknown fixture" />
+            <p className="small dim m-0">
+              Fixture <span className="mono">{fixtureId}</span> is not part of the bundled demo
+              data. Try{" "}
+              <Link className="mono" href={`/matches/${fx.fixtureId}`}>
+                {fx.fixtureId}
+              </Link>
+              .
+            </p>
+          </Plate>
+        </section>
       ) : (
         <>
-          <div className="scoreline">
-            <span className="teams">
-              {f.participant1} <span className="score">{f.participant1Score}</span>
-              <span className="dim"> — </span>
-              <span className="score">{f.participant2Score}</span> {f.participant2}
-            </span>
-            <span className="final-tag">FINAL</span>
-            <span className="badge-sim">synthetic fixture</span>
-            <span className="spacer" />
-            <span className="tiny dim">{fx.competition} · fixture {fx.fixtureId}</span>
+          <section style={{ padding: "30px 0 0" }}>
+            <Reveal>
+              <div className="kicker mb-2">
+                MATCH DOSSIER · {fx.competition} · FIXTURE {fx.fixtureId}
+              </div>
+              <div className="score-hero">
+                <span className="teams">
+                  {f.participant1} <span className="num">{f.participant1Score}</span>
+                  <span className="vs"> — </span>
+                  <span className="num">{f.participant2Score}</span> {f.participant2}
+                </span>
+                <span className="final-tag">FINAL</span>
+                <StampSim>synthetic fixture</StampSim>
+              </div>
+            </Reveal>
+          </section>
+
+          <div className="sec">
+            <SectionIndex no="01" title="The record spine — deterministic recording" />
+            <Reveal>
+              <Plate>
+                <RecordSpine
+                  records={fx.records.map((r) => ({
+                    key: String(r.sequence),
+                    at: new Date(r.timestampMs).toISOString(),
+                    action: r.action,
+                    detail: `status ${r.statusId} · period ${r.period} · seq ${r.sequence} · score ${r.participant1Score}–${r.participant2Score}`,
+                    terminal: r.action === "game_finalised",
+                  }))}
+                />
+                <p className="tiny faint mt-3 m-0">{fx.description}</p>
+              </Plate>
+            </Reveal>
           </div>
 
-          <div className="panel">
-            <h3>TxLINE record timeline (deterministic recording)</h3>
-            <div className="stack-sm">
-              {fx.records.map((r) => (
-                <div key={r.sequence} className="inset row-base">
-                  <span className="mono tiny faint">{new Date(r.timestampMs).toISOString()}</span>
-                  <span className={`mono small ${r.action === "game_finalised" ? "text-ok" : "hi"}`}>
-                    {r.action}
-                  </span>
-                  <span className="mono tiny dim">
-                    status {r.statusId} · period {r.period} · seq {r.sequence} · score {r.participant1Score}–{r.participant2Score}
-                  </span>
-                  {r.action === "game_finalised" && (
-                    <span className="chip ok sm">FINAL marker (status 100 / period 100)</span>
-                  )}
-                </div>
-              ))}
-            </div>
-            <p className="tiny faint mt-2">
-              {fx.description}
-            </p>
-          </div>
-
-          <div className="two-col mt-4">
-            <div className="panel">
-              <h3>Commitment</h3>
-              <dl className="kv">
-                <dt>daily root</dt><dd>{fx.rootAccount}</dd>
-                <dt>strategy</dt><dd>{fx.strategy}</dd>
-                <dt>emitter</dt><dd>{fx.wormhole.emitterBase58}</dd>
-                <dt>emitter sequence</dt><dd>{fx.wormhole.sequence}</dd>
-                <dt>destination</dt><dd>{fx.destinationChain} (Base Sepolia)</dd>
-              </dl>
-            </div>
-            <div className="panel">
-              <h3>Outcome on Base</h3>
-              <p className="small dim m-0">
-                Result: <strong className="hi">{f.participant1} wins {f.participant1Score}–{f.participant2Score}</strong>
-                <br />
-                Attestation:{" "}
-                <Link className="mono" href={`/attestations/${demoManifest.attestationId}`}>
-                  {shortHex(demoManifest.attestationId)}
-                </Link>
-                <br />
-                Registry:{" "}
-                <a className="mono" href={explorerAddress(deployment.contracts.finalityRegistry)} target="_blank" rel="noreferrer">
-                  {shortHex(deployment.contracts.finalityRegistry)} ↗
-                </a>
-                <br />
-                Market:{" "}
-                <a className="mono" href={explorerAddress(deployment.contracts.demoPredictionMarket)} target="_blank" rel="noreferrer">
-                  {shortHex(deployment.contracts.demoPredictionMarket)} ↗
-                </a>
-              </p>
-              <p className="small mt-2">
-                <Link href="/control-room">watch this outcome relay in the control room →</Link>
-              </p>
+          <div className="sec">
+            <SectionIndex no="02" title="What the records became" />
+            <div className="grid-2">
+              <Reveal>
+                <Plate>
+                  <PlateHead kicker="COMMITMENT" title="Sealed on Solana">
+                    <StampSim>simulated leg</StampSim>
+                  </PlateHead>
+                  <dl className="kv">
+                    <div className="row"><dt>daily root</dt><dd>{fx.rootAccount}</dd></div>
+                    <div className="row"><dt>strategy</dt><dd>{fx.strategy}</dd></div>
+                    <div className="row"><dt>emitter</dt><dd>{fx.wormhole.emitterBase58}</dd></div>
+                    <div className="row"><dt>emitter sequence</dt><dd>{fx.wormhole.sequence}</dd></div>
+                    <div className="row"><dt>destination</dt><dd>{fx.destinationChain} (Base Sepolia)</dd></div>
+                  </dl>
+                </Plate>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <Plate>
+                  <PlateHead kicker="SETTLEMENT" title="Outcome on Base">
+                    <StampReal>REAL, verify on BaseScan</StampReal>
+                  </PlateHead>
+                  <p className="small dim m-0">
+                    Result:{" "}
+                    <strong className="hi">
+                      {f.participant1} wins {f.participant1Score}–{f.participant2Score}
+                    </strong>
+                  </p>
+                  <dl className="kv mt-2">
+                    <div className="row">
+                      <dt>attestation</dt>
+                      <dd>
+                        <Link className="mono" href={`/attestations/${demoManifest.attestationId}`}>
+                          {shortHex(demoManifest.attestationId)}
+                        </Link>
+                      </dd>
+                    </div>
+                    <div className="row">
+                      <dt>registry</dt>
+                      <dd>
+                        <a className="mono" href={explorerAddress(deployment.contracts.finalityRegistry)} target="_blank" rel="noreferrer">
+                          {shortHex(deployment.contracts.finalityRegistry)} <IconExternal size={11} style={{ verticalAlign: "-1px" }} />
+                        </a>
+                      </dd>
+                    </div>
+                    <div className="row">
+                      <dt>market</dt>
+                      <dd>
+                        <a className="mono" href={explorerAddress(deployment.contracts.demoPredictionMarket)} target="_blank" rel="noreferrer">
+                          {shortHex(deployment.contracts.demoPredictionMarket)} <IconExternal size={11} style={{ verticalAlign: "-1px" }} />
+                        </a>
+                      </dd>
+                    </div>
+                  </dl>
+                  <p className="small mt-3 m-0">
+                    <Link href="/control-room">watch this outcome relay in the control room →</Link>
+                  </p>
+                </Plate>
+              </Reveal>
             </div>
           </div>
         </>
