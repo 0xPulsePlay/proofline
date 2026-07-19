@@ -30,6 +30,31 @@ export interface RunContracts {
   wormholeCoreKind: "mainnet" | "testnet" | "dev-guardian-set-mock";
 }
 
+/**
+ * Real protocol-math derivations for the run — every value here is produced
+ * by the same code paths the pipeline uses (payload codec, keccak hashing,
+ * dev-guardian secp256k1 signing, attestation-id derivation). The UI renders
+ * these as REAL hex; simulation badges apply to network legs, not to these.
+ */
+export interface RunDerivation {
+  /** 176-byte MatchOutcomeV1, hex */
+  payloadHex: string;
+  proofBundleHash: string;
+  validationInstructionHash: string;
+  attestationId: string;
+  domainSeparator: string;
+  /** 32-byte Solana emitter, hex (matches registeredEmitter on Base) */
+  sourceEmitter: string;
+  txlineProgramId: string;
+  dailyRootAccount: string;
+  /** full encoded VAA, hex */
+  vaaHex?: string;
+  /** keccak256 of the encoded VAA — Base replay-protection key */
+  vaaHash?: string;
+  /** guardian indices whose signatures are in the VAA */
+  guardianIndices?: number[];
+}
+
 export interface RunManifest {
   runId: string;
   createdAtIso: string;
@@ -39,6 +64,8 @@ export interface RunManifest {
   attestationId: string;
   /** legs that are simulated in this run (UI badges) */
   simulatedLegs: string[];
+  /** real cryptographic derivations for the proof-path visualization */
+  derivation?: RunDerivation;
   events: RunEvent[];
   artifacts: Record<string, string>; // filename -> description
 }

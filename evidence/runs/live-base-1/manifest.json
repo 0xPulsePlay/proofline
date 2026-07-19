@@ -1,0 +1,258 @@
+{
+  "runId": "live-base-1",
+  "createdAtIso": "2026-07-19T11:01:43.293Z",
+  "description": "Proofline dual-lane pipeline run over the recorded fixture 982341 (Canada 2-1 France). Base-transaction leg LIVE on Base Sepolia (real onReport / submitVaa / settle receipts); Solana + Wormhole-guardian legs SIMULATED and labeled; all hashes, signatures and payload bytes are real and independently verifiable (verify-evidence).",
+  "fixture": {
+    "fixtureId": "982341",
+    "participant1": "Canada",
+    "participant2": "France",
+    "participant1Score": 2,
+    "participant2Score": 1,
+    "period": 100,
+    "competition": "FIFA World Cup — Final",
+    "synthetic": true
+  },
+  "contracts": {
+    "chainId": 84532,
+    "explorerBaseUrl": "https://sepolia.basescan.org",
+    "finalityRegistry": "0xac0b2f8250f16e076e2cfcf5e79243be0198c64f",
+    "creLevel3Receiver": "0xa2166ea27f2ce4029e3426f2d3c84fd7151cb05f",
+    "wormholeOutcomeReceiver": "0x58512d54b8fc32bc6f03800416c93ab08a336f60",
+    "demoPredictionMarket": "0x84edaa2144931606db5240993771738f3ad97bba",
+    "wormholeCore": "0xaac43563eca9a2a5ca989935f909588b08655ab4",
+    "wormholeCoreKind": "dev-guardian-set-mock"
+  },
+  "attestationId": "0x062f6f5c62639f0267c364f320c828e2967022fcde4e1df4f3f1f8ce53061d6d",
+  "simulatedLegs": [
+    "txline-feed (recorded fixture)",
+    "solana-adapter (file-backed ProofBuffer)",
+    "level3-rpc (recorded responders)",
+    "wormhole-guardians (dev guardian set)"
+  ],
+  "events": [
+    {
+      "seq": 0,
+      "at": 1784458360093,
+      "simulated": false,
+      "event": {
+        "type": "HEARTBEAT",
+        "at": 1784458360093,
+        "nextAt": 1784458360343
+      }
+    },
+    {
+      "seq": 1,
+      "at": 1784458360097,
+      "simulated": true,
+      "event": {
+        "type": "FINAL_RECORD_OBSERVED",
+        "fixtureId": "982341",
+        "sequence": "184"
+      }
+    },
+    {
+      "seq": 2,
+      "at": 1784458360352,
+      "simulated": false,
+      "event": {
+        "type": "HEARTBEAT",
+        "at": 1784458360352,
+        "nextAt": 1784458360602
+      }
+    },
+    {
+      "seq": 3,
+      "at": 1784458360354,
+      "simulated": true,
+      "event": {
+        "type": "PROOF_AVAILABLE",
+        "proofHash": "0xc6c0ff5b7a44b9bf60292160dcfdde2f78f9354a062ac01d26e21acbeed264d7",
+        "rootPda": "7dai1yRoots1111111111111111111111111111111"
+      }
+    },
+    {
+      "seq": 4,
+      "at": 1784458360374,
+      "simulated": true,
+      "event": {
+        "type": "PROOF_STAGED",
+        "solanaSignature": "sim:seal:470715cebd1e3d12"
+      }
+    },
+    {
+      "seq": 5,
+      "at": 1784458360375,
+      "simulated": true,
+      "event": {
+        "type": "SOLANA_VERIFY_SUBMITTED",
+        "signature": "sim:verify-command:7cd2cb2489caf631"
+      }
+    },
+    {
+      "seq": 6,
+      "at": 1784458360627,
+      "simulated": false,
+      "event": {
+        "type": "HEARTBEAT",
+        "at": 1784458360627,
+        "nextAt": 1784458360877
+      }
+    },
+    {
+      "seq": 7,
+      "at": 1784458364240,
+      "simulated": false,
+      "event": {
+        "type": "HEARTBEAT",
+        "at": 1784458364240,
+        "nextAt": 1784458364490
+      }
+    },
+    {
+      "seq": 8,
+      "at": 1784458364265,
+      "simulated": true,
+      "event": {
+        "type": "LEVEL3_RPC_RESULT",
+        "provider": "rpc-a",
+        "agreed": true,
+        "simulationDigest": "0x55edb51c9163afe475731b7b2785aa3f9a0c65fbab0e821c61a491ad8e3c273b"
+      }
+    },
+    {
+      "seq": 9,
+      "at": 1784458364266,
+      "simulated": true,
+      "event": {
+        "type": "LEVEL3_RPC_RESULT",
+        "provider": "rpc-b",
+        "agreed": true,
+        "simulationDigest": "0x55edb51c9163afe475731b7b2785aa3f9a0c65fbab0e821c61a491ad8e3c273b"
+      }
+    },
+    {
+      "seq": 10,
+      "at": 1784458364266,
+      "simulated": true,
+      "event": {
+        "type": "LEVEL3_RPC_RESULT",
+        "provider": "rpc-c",
+        "agreed": true,
+        "simulationDigest": "0x55edb51c9163afe475731b7b2785aa3f9a0c65fbab0e821c61a491ad8e3c273b"
+      }
+    },
+    {
+      "seq": 11,
+      "at": 1784458365254,
+      "simulated": false,
+      "event": {
+        "type": "LEVEL3_BASE_FINALIZED",
+        "txHash": "0x64a90fab39f431750cc973468715ac8227f3790a93cc53b96c1b3a491e6cab69"
+      }
+    },
+    {
+      "seq": 12,
+      "at": 1784458368747,
+      "simulated": false,
+      "event": {
+        "type": "HEARTBEAT",
+        "at": 1784458368746,
+        "nextAt": 1784458368996
+      }
+    },
+    {
+      "seq": 13,
+      "at": 1784458368748,
+      "simulated": true,
+      "event": {
+        "type": "TXLINE_CPI_VERIFIED",
+        "slot": 351024612
+      }
+    },
+    {
+      "seq": 14,
+      "at": 1784458368751,
+      "simulated": true,
+      "event": {
+        "type": "WORMHOLE_MESSAGE_PUBLISHED",
+        "emitter": "Emitter1111111111111111111111111111111111",
+        "sequence": "184"
+      }
+    },
+    {
+      "seq": 15,
+      "at": 1784458368945,
+      "simulated": true,
+      "event": {
+        "type": "VAA_READY",
+        "vaaHash": "0x8c0a6917ea92914512d2a646dd096fd3169695138cd17ebe401e111a3f59b08d",
+        "signatures": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          10,
+          11,
+          13,
+          15,
+          16,
+          18
+        ]
+      }
+    },
+    {
+      "seq": 16,
+      "at": 1784458369709,
+      "simulated": false,
+      "event": {
+        "type": "LEVEL4_BASE_SUBMITTED",
+        "txHash": "0x5fee92ce5329b1cf83a21af59831ed14c47c24e8910cada094939c2baaa7d7e4"
+      }
+    },
+    {
+      "seq": 17,
+      "at": 1784458369709,
+      "simulated": false,
+      "event": {
+        "type": "BASE_VAA_VERIFIED",
+        "blockNumber": 44345041
+      }
+    },
+    {
+      "seq": 18,
+      "at": 1784458819385,
+      "simulated": false,
+      "event": {
+        "type": "DUAL_FINALITY_REACHED",
+        "attestationId": "0x062f6f5c62639f0267c364f320c828e2967022fcde4e1df4f3f1f8ce53061d6d"
+      }
+    },
+    {
+      "seq": 19,
+      "at": 1784458820189,
+      "simulated": false,
+      "event": {
+        "type": "CONSUMER_SETTLED",
+        "txHash": "0x4fca3d34ab7f0b0e50290deedb2d529ad301ccdd694aac519538bf7c4bc3fc93"
+      }
+    }
+  ],
+  "artifacts": {
+    "events.ndjson": "Full RunEvent stream (real timestamps; simulated legs labeled)",
+    "handoff.json": "source-dispatch → attestor/executor handoff",
+    "txline-final-record.json": "Canonical final score record (recorded synthetic fixture)",
+    "txline-proof.json": "TxLINE proof bundle inputs (synthetic proof, labeled)",
+    "validation-instruction.bin": "Canonical validate_stat_v2 instruction data",
+    "level3-report.json": "Level 3 CRE report + exact onReport calldata (LIVE Base Sepolia delivery)",
+    "level4-report.json": "Level 4 CRE report + exact submitVaa calldata (LIVE Base Sepolia delivery)",
+    "vaa.bin": "Signed VAA bytes — dev guardian set (13-of-19 real secp256k1 signatures)",
+    "vaa-decoded.json": "Decoded VAA header/payload + signing digest",
+    "solana-verify-receipt.json": "SIMULATED Solana verify receipt",
+    "solana-publish-receipt.json": "SIMULATED Wormhole publish receipt",
+    "base-relay-receipt.json": "Base delivery receipts (simulated:true in sim runs)",
+    "market-settlement-receipt.json": "Market settlement receipt"
+  }
+}

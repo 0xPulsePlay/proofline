@@ -1,0 +1,7 @@
+{
+  "runs": [
+    "live-base-1",
+    "demo-canonical"
+  ],
+  "default": "live-base-1"
+}

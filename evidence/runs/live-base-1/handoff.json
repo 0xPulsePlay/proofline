@@ -1,0 +1,14 @@
+{
+  "runId": "live-base-1",
+  "fixturePath": "packages/test-vectors/fixture-982341.json",
+  "fixtureId": "982341",
+  "sequence": "184",
+  "proofBundleHash": "0xc6c0ff5b7a44b9bf60292160dcfdde2f78f9354a062ac01d26e21acbeed264d7",
+  "bufferAddress": "sim:proofbuffer:afd600ce6fed",
+  "rootAccount": "7dai1yRoots1111111111111111111111111111111",
+  "wormhole": {
+    "emitterBase58": "Emitter1111111111111111111111111111111111",
+    "sequence": "184"
+  },
+  "simulatedSolanaLeg": true
+}

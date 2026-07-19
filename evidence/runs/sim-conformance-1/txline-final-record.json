@@ -1,0 +1,13 @@
+{
+  "action": "game_finalised",
+  "fixtureId": "982341",
+  "statusId": 100,
+  "period": 100,
+  "participant1": "Canada",
+  "participant2": "France",
+  "participant1Score": 2,
+  "participant2Score": 1,
+  "sequence": "184",
+  "timestampMs": 1784498100000,
+  "sourceNote": "recorded deterministic fixture (synthetic) — packages/test-vectors"
+}

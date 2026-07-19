@@ -1,0 +1,36 @@
+{
+  "description": "Deterministic recorded TxLINE-style fixture state — Canada 2-1 France, fixture 982341, emitter sequence 184. Synthetic recording whose fields match packages/test-vectors/match-outcome-v1.json: a pipeline run over this file must independently reproduce that vector's validationInstructionHash, proofBundleHash and attestationId byte-for-byte.",
+  "fixtureId": "982341",
+  "participant1": "Canada",
+  "participant2": "France",
+  "competition": "FIFA World Cup — Final",
+  "records": [
+    {
+      "action": "status_update",
+      "statusId": 30,
+      "period": 2,
+      "sequence": "171",
+      "participant1Score": 2,
+      "participant2Score": 1,
+      "timestampMs": 1784497500000
+    },
+    {
+      "action": "game_finalised",
+      "statusId": 100,
+      "period": 100,
+      "sequence": "184",
+      "participant1Score": 2,
+      "participant2Score": 1,
+      "timestampMs": 1784498100000
+    }
+  ],
+  "proof": { "synthetic": true, "note": "deterministic demo fixture" },
+  "rootAccount": "7dai1yRoots1111111111111111111111111111111",
+  "dailyRootPdaByEpochDay": {
+    "20653": "7dai1yRoots1111111111111111111111111111111"
+  },
+  "strategy": "validate_stat_v2 exact-equality predicate",
+  "proofAvailability": { "ticksAfterFinalObserved": 1 },
+  "wormhole": { "emitterBase58": "Emitter1111111111111111111111111111111111", "sequence": "184" },
+  "destinationChain": 10004
+}

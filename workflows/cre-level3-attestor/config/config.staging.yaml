@@ -1,0 +1,33 @@
+# Staging config — real 30s heartbeat. Provider URLs are placeholders for the
+# three independent Solana RPC endpoints; flip mode to live per provider once
+# real endpoints are configured. Secrets are names only.
+mode: simulation
+runId: staging
+runDir: ../../../evidence/runs/staging
+
+heartbeat:
+  intervalMs: 30000
+
+rpcProviders:
+  - name: rpc-a
+    url: sim://recorded/rpc-a # live example: https://<provider-a>/<key from env>
+    mode: simulated
+  - name: rpc-b
+    url: sim://recorded/rpc-b
+    mode: simulated
+  - name: rpc-c
+    url: sim://recorded/rpc-c
+    mode: simulated
+
+quorum: 2
+
+txoracleProgramId: 9ExbZjAapQww1vfcisDmrngPinHTEfpjYRWMunJgcKaA
+
+receiver:
+  chainId: 84532
+  deployment: base-sepolia
+  contract: creLevel3Receiver
+  rpcUrlEnv: BASE_RPC_URL
+
+forwarder:
+  privateKeySecret: FORWARDER_PRIVATE_KEY

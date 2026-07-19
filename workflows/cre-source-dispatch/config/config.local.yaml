@@ -1,0 +1,24 @@
+# Local simulation config — deterministic recorded fixture, accelerated clock.
+mode: simulation
+runId: local-dev
+# Relative paths resolve against this config file's directory.
+runDir: ../../../evidence/runs/local-dev
+
+fixture:
+  source: file
+  path: ../../../packages/test-vectors/fixture-982341.json
+  # Optional live branch: set source: txline-api and export TXLINE_API_BASE_URL
+  # (+ TXLINE_API_KEY secret). Not used in the deterministic local run.
+  fixtureId: "982341"
+
+heartbeat:
+  # Accelerated for local simulation; the CRE cron trigger in workflow.yaml
+  # and config.staging.yaml use the real 30s cadence.
+  intervalMs: 250
+  maxTicks: 6
+
+proofBuffer:
+  chunkSize: 256
+
+secrets:
+  - TXLINE_API_KEY

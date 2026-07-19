@@ -1,0 +1,6 @@
+{
+  "simulated": true,
+  "note": "Wormhole publication SIMULATED in this build — no real Solana emission; the dev guardian set signed the VAA (see vaa-decoded.json).",
+  "emitter": "Emitter1111111111111111111111111111111111",
+  "sequence": "184"
+}

@@ -1,0 +1,23 @@
+# Derived from workflows/cre-vaa-executor/config/config.live-base.yaml by relay-fixture
+# (only runId/runDir/paths changed).
+mode: live
+runId: live-base-1
+runDir: evidence/runs/live-base-1
+heartbeat:
+  intervalMs: 250
+  maxTicks: 8
+vaaSource:
+  kind: dev-guardian-file
+  locator: evidence/runs/live-base-1/vaa.bin
+txoracleProgramId: 9ExbZjAapQww1vfcisDmrngPinHTEfpjYRWMunJgcKaA
+receiver:
+  chainId: 84532
+  deployment: base-sepolia
+  contract: wormholeOutcomeReceiver
+  rpcUrlEnv: BASE_RPC_URL
+market:
+  settle: true
+  deployment: base-sepolia
+  contract: demoPredictionMarket
+forwarder:
+  privateKeySecret: FORWARDER_PRIVATE_KEY

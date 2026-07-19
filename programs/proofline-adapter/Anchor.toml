@@ -1,0 +1,21 @@
+[toolchain]
+anchor_version = "0.32.1"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+proofline_adapter = "PRF5wS3RSArKNCC2pYtDvBciM9KxtDw6tqAUzimKqbN"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+# Rust unit tests only — no localnet integration tests (program is reference
+# source; TxOracle exists only on mainnet, see lib.rs header).
+test = "cargo test --manifest-path programs/proofline-adapter/Cargo.toml"

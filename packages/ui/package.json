@@ -1,0 +1,28 @@
+{
+  "name": "@proofline/ui",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./control-room": "./src/control-room/index.ts",
+    "./guardian-ring": "./src/guardian-ring/index.ts",
+    "./chain-column": "./src/chain-column/index.ts",
+    "./proof-path": "./src/proof-path/index.ts",
+    "./evidence-drawer": "./src/evidence-drawer/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@proofline/event-model": "workspace:*"
+  },
+  "peerDependencies": {
+    "framer-motion": "^12.0.0",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "framer-motion": "^12.0.0",
+    "react": "^19.0.0",
+    "typescript": "^5.6.0"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@proofline/cre-level3-attestor",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "sim": "tsx main.ts --config config/config.local.yaml",
+    "staging": "tsx main.ts --config config/config.staging.yaml"
+  },
+  "dependencies": {
+    "@proofline/config": "workspace:*",
+    "@proofline/event-model": "workspace:*",
+    "@proofline/evm-sdk": "workspace:*",
+    "@proofline/observability": "workspace:*",
+    "@proofline/protocol": "workspace:*",
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

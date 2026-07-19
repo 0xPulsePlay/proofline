@@ -1,0 +1,26 @@
+# CRE workflow manifest — proofline-source-dispatch.
+#
+# HONESTY NOTE: this workflow is written to the CRE programming model but in
+# THIS BUILD it executes via a LOCAL SIMULATION runner
+# (`pnpm tsx main.ts --config config/config.local.yaml`) — no deployed DON.
+# See workflows/README-workflows.md for the DON-deploy path we did not take.
+name: proofline-source-dispatch
+description: >
+  Heartbeat observer for TxLINE finality: detects game_finalised, waits for
+  proof availability, canonicalizes the proof, stages a sealed ProofBuffer
+  (Solana leg simulated in this build), writes the compact verification
+  command and records the source transaction signature. State-transition
+  discipline per design §3.6 — no on-chain writes on heartbeats, no repeat
+  work once relayed.
+entrypoint: main.ts
+configs:
+  local: config/config.local.yaml
+  staging: config/config.staging.yaml
+triggers:
+  - id: heartbeat
+    type: cron
+    # every 30 seconds — the heartbeat lives in the observer, never on-chain
+    schedule: "*/30 * * * * *"
+secrets:
+  # Names only — values live in the DON secrets store (deployed) or env (local).
+  - TXLINE_API_KEY

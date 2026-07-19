@@ -1,0 +1,23 @@
+# Staging config — real 30s heartbeat; TxLINE API branch enabled.
+# Secrets are referenced by NAME only; values are never present in configs.
+mode: simulation # Solana leg remains simulated in this build even on staging
+runId: staging
+runDir: ../../../evidence/runs/staging
+
+fixture:
+  source: txline-api # reads TXLINE_API_BASE_URL env + TXLINE_API_KEY secret
+  # Deterministic fallback fixture, used when TXLINE_API_BASE_URL is unset:
+  path: ../../../packages/test-vectors/fixture-982341.json
+  fixtureId: "982341"
+
+heartbeat:
+  intervalMs: 30000
+
+proofBuffer:
+  chunkSize: 900
+
+# coordinatorUrl can also come from the COORDINATOR_URL env var (env wins).
+# coordinatorUrl: http://localhost:4600
+
+secrets:
+  - TXLINE_API_KEY

@@ -1,0 +1,239 @@
+{
+  "runId": "demo-canonical",
+  "createdAtIso": "2026-07-19T09:01:33.510Z",
+  "description": "Canonical bundled demo run — Canada 2–1 France, fixture 982341. All hashes, payload bytes, dev-guardian VAA signatures and attestation ids are REAL protocol math (asserted against the conformance vector). Network legs (Solana broadcast, guardian observation, Base transactions) are simulated in this recording and marked per-event.",
+  "fixture": {
+    "fixtureId": "982341",
+    "participant1": "Canada",
+    "participant2": "France",
+    "participant1Score": 2,
+    "participant2Score": 1,
+    "period": 100,
+    "kickoffIso": "2026-07-19T16:00:00Z",
+    "competition": "World Cup Final (demo)",
+    "synthetic": true
+  },
+  "contracts": {
+    "chainId": 84532,
+    "explorerBaseUrl": "https://sepolia.basescan.org",
+    "finalityRegistry": "0xac0b2f8250f16e076e2cfcf5e79243be0198c64f",
+    "creLevel3Receiver": "0xa2166ea27f2ce4029e3426f2d3c84fd7151cb05f",
+    "wormholeOutcomeReceiver": "0x58512d54b8fc32bc6f03800416c93ab08a336f60",
+    "demoPredictionMarket": "0x84edaa2144931606db5240993771738f3ad97bba",
+    "wormholeCore": "0xaac43563eca9a2a5ca989935f909588b08655ab4",
+    "wormholeCoreKind": "dev-guardian-set-mock"
+  },
+  "attestationId": "0x062f6f5c62639f0267c364f320c828e2967022fcde4e1df4f3f1f8ce53061d6d",
+  "simulatedLegs": [
+    "txline-feed",
+    "level3-rpc",
+    "solana-adapter",
+    "wormhole-guardians",
+    "base-transactions"
+  ],
+  "derivation": {
+    "payloadHex": "0x5052464c010100002714020100000000000efd4500000000000000b80000019f7c6017200000006400000002000000017a70e89067f323972a7ca9ce81003e1be5bcf568d87286a332da3b7a81920dd300077f53763ea45b56b622045ed8ddb28d335f2d1036b9260cd63244000000008ad24bbf8aca31a6f115b26e47f6f8cd457fde45c3dbef376d14839d16b6b083c6c0ff5b7a44b9bf60292160dcfdde2f78f9354a062ac01d26e21acbeed264d7",
+    "proofBundleHash": "0xc6c0ff5b7a44b9bf60292160dcfdde2f78f9354a062ac01d26e21acbeed264d7",
+    "validationInstructionHash": "0x8ad24bbf8aca31a6f115b26e47f6f8cd457fde45c3dbef376d14839d16b6b083",
+    "attestationId": "0x062f6f5c62639f0267c364f320c828e2967022fcde4e1df4f3f1f8ce53061d6d",
+    "domainSeparator": "0xdc50261f8c3608c7de8fb4e60706348e1cc43ac3172d1457743ab79a10f27ab0",
+    "sourceEmitter": "0x000044ba2902cccc6eee24233bc4173704b97b786a006b7bf66d25fc00000000",
+    "txlineProgramId": "0x7a70e89067f323972a7ca9ce81003e1be5bcf568d87286a332da3b7a81920dd3",
+    "dailyRootAccount": "0x00077f53763ea45b56b622045ed8ddb28d335f2d1036b9260cd6324400000000",
+    "vaaHex": "0x01000000000d00c87ea2e90f7244f78b134f832457c3503f274bd239738bb1b03a0cb8cd9f10496a2f44a1c052e4acb07c3e1bc101b0466407bfcd85c35309a86c62cb898517e800017c47abf08bbe8f7cb2e0e0b9d841be86071dbe3e13ac77d6a718f93a2e36287b263b162f60b61ac4d8b67d14c12a2aab88822fa2af4fe1359d39f380bdc1053001021bd31538753f972e78773da7e3e2a58dd277be2c80569f201ed1d899491d68ca171f82153532accb59ae633c206bf459f7c5aaed6766dab83178a60036ed49a60104d23cd394d642a6ade393123bffe89bc6c03330373a2dc0fc3d873e7b0ca6e2a2548bccd210ace528390ed634ab66ddabe9fb4c837f24a5e4d07a8401cb73e4fc0005c47a6eca31a2fefabc5967b9c724e9e2ec4a4670e53f4b298b92213e7fa1255715e8375754922c2a84419430742af3b1810f3cf6a72793bef1addfb0f1e6438f010700a9fad5f13884f30b2bbea56c5dc53130c385c521581d65faf33f467d879c860bdf4357caafe7218bc7c522c5609b512499ed590a28957205e171b02d1ced36010811959611c529a9d3092e1ead38c839cd324340ba7361ca6402e09ef257ad68f87cafcc7e154c25561fabe121202aae9efc8bda780c4f0a1d334e0c99cdc1699d010aa5b0968e829991f3a29f79907aace5d8c47d243260246b5b70d9bb133c11406204dcacadd0875a2f1ec03ffd63bc8a5da9ac81cab658ebae5b449cffec20f727010bf1c3d82428fadd8e82ad44cab53c5aaa75193b1c724041799de3dc429d2912bd2d995f7033658b6a8e6622ee7854985222cf6031985e494ceb600e24c4d6b752010d8f6d4cd2f456893e5d9a61d451c84e9c7bdc361b4dcc81b514dd1e7fc3b3cbcf11559be47209dff62d077b529ad71af860071108600047c856d0c90e4f084e3f000f984ecf56a9e7a4a8365904c9d70e1a8cfaab9bbd1013a37987849a28dce6c4a130b54817ce03d94ad3c37c94e08c344b2ab9c6d56677d563f1cfa2b9520133290010045cabf35336bb27d6859a7ba1ba0b8b1ff34d6322e060992136573a6edeea04080645c90d6d7d8da7d993e5ce3f6010ed53be7d1928f199a59e74c3b9a582a101127e052a4c53846aefb53e0b90f25cb1bcb499df9500ae18532e5b27634ecfc714568cd4007baebcff00a7f5b84544fa85d834d08b5712d2db8656cd0869769bc7016a5d47b4000000000001000044ba2902cccc6eee24233bc4173704b97b786a006b7bf66d25fc0000000000000000000000b8015052464c010100002714020100000000000efd4500000000000000b80000019f7c6017200000006400000002000000017a70e89067f323972a7ca9ce81003e1be5bcf568d87286a332da3b7a81920dd300077f53763ea45b56b622045ed8ddb28d335f2d1036b9260cd63244000000008ad24bbf8aca31a6f115b26e47f6f8cd457fde45c3dbef376d14839d16b6b083c6c0ff5b7a44b9bf60292160dcfdde2f78f9354a062ac01d26e21acbeed264d7",
+    "vaaHash": "0x8c0a6917ea92914512d2a646dd096fd3169695138cd17ebe401e111a3f59b08d",
+    "guardianIndices": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      11,
+      13,
+      15,
+      16,
+      18
+    ]
+  },
+  "events": [
+    {
+      "seq": 0,
+      "at": 1784487300000,
+      "simulated": true,
+      "event": {
+        "type": "HEARTBEAT",
+        "at": 1784487300000,
+        "nextAt": 1784487330000
+      }
+    },
+    {
+      "seq": 1,
+      "at": 1784487301200,
+      "simulated": true,
+      "event": {
+        "type": "FINAL_RECORD_OBSERVED",
+        "fixtureId": "982341",
+        "sequence": "184"
+      }
+    },
+    {
+      "seq": 2,
+      "at": 1784487306400,
+      "simulated": false,
+      "event": {
+        "type": "PROOF_AVAILABLE",
+        "proofHash": "0xc6c0ff5b7a44b9bf60292160dcfdde2f78f9354a062ac01d26e21acbeed264d7",
+        "rootPda": "7dai1yRoots1111111111111111111111111111111"
+      }
+    },
+    {
+      "seq": 3,
+      "at": 1784487308500,
+      "simulated": true,
+      "event": {
+        "type": "LEVEL3_RPC_RESULT",
+        "provider": "RPC A",
+        "agreed": true,
+        "simulationDigest": "0xd9ff47c33863d04b1846637a13af6efdefa9b8657eb82b024bd940b99bd93c7b"
+      }
+    },
+    {
+      "seq": 4,
+      "at": 1784487309400,
+      "simulated": true,
+      "event": {
+        "type": "LEVEL3_RPC_RESULT",
+        "provider": "RPC B",
+        "agreed": true,
+        "simulationDigest": "0xc45d0c263a93d9d4576e6f64505d6a2961d6d352296af10762e005e0b40730b6"
+      }
+    },
+    {
+      "seq": 5,
+      "at": 1784487310100,
+      "simulated": true,
+      "event": {
+        "type": "LEVEL3_RPC_RESULT",
+        "provider": "RPC C",
+        "agreed": true,
+        "simulationDigest": "0x4dea39e8ed6bad183727166dd9e3a6a4f0c40beb1d8ee93302e39e54645d74ca"
+      }
+    },
+    {
+      "seq": 6,
+      "at": 1784487313600,
+      "simulated": true,
+      "event": {
+        "type": "LEVEL3_BASE_FINALIZED",
+        "txHash": "0xd2024338efa0619edda7a037422c3cf866ead4a5dbb66c9f2f03c4c74564a45c"
+      }
+    },
+    {
+      "seq": 7,
+      "at": 1784487315100,
+      "simulated": true,
+      "event": {
+        "type": "PROOF_STAGED",
+        "solanaSignature": "SIMStageDemoNotBroadcast"
+      }
+    },
+    {
+      "seq": 8,
+      "at": 1784487317000,
+      "simulated": true,
+      "event": {
+        "type": "SOLANA_VERIFY_SUBMITTED",
+        "signature": "SIMVerifyDemoNotBroadcast"
+      }
+    },
+    {
+      "seq": 9,
+      "at": 1784487319400,
+      "simulated": true,
+      "event": {
+        "type": "TXLINE_CPI_VERIFIED",
+        "slot": 1234567
+      }
+    },
+    {
+      "seq": 10,
+      "at": 1784487321500,
+      "simulated": true,
+      "event": {
+        "type": "WORMHOLE_MESSAGE_PUBLISHED",
+        "emitter": "Emitter1111111111111111111111111111111111",
+        "sequence": "184"
+      }
+    },
+    {
+      "seq": 11,
+      "at": 1784487328300,
+      "simulated": true,
+      "event": {
+        "type": "VAA_READY",
+        "vaaHash": "0x8c0a6917ea92914512d2a646dd096fd3169695138cd17ebe401e111a3f59b08d",
+        "signatures": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          10,
+          11,
+          13,
+          15,
+          16,
+          18
+        ]
+      }
+    },
+    {
+      "seq": 12,
+      "at": 1784487330900,
+      "simulated": true,
+      "event": {
+        "type": "LEVEL4_BASE_SUBMITTED",
+        "txHash": "0xb6098bc7cac13486368156d99126962cf103fbe21537ad3e1782f15c0a87cb04"
+      }
+    },
+    {
+      "seq": 13,
+      "at": 1784487333800,
+      "simulated": true,
+      "event": {
+        "type": "BASE_VAA_VERIFIED",
+        "blockNumber": 44339771
+      }
+    },
+    {
+      "seq": 14,
+      "at": 1784487334600,
+      "simulated": false,
+      "event": {
+        "type": "DUAL_FINALITY_REACHED",
+        "attestationId": "0x062f6f5c62639f0267c364f320c828e2967022fcde4e1df4f3f1f8ce53061d6d"
+      }
+    },
+    {
+      "seq": 15,
+      "at": 1784487338000,
+      "simulated": true,
+      "event": {
+        "type": "CONSUMER_SETTLED",
+        "txHash": "0x3948e3801e8ea13376975f2ba3079d9e3bfd30251b86703c092ab3f701c79e13"
+      }
+    }
+  ],
+  "artifacts": {
+    "manifest.json": "this recorded event stream + derivations",
+    "payload.hex": "MatchOutcomeV1 (176 bytes) — keccak-committed fields, conformance-asserted",
+    "vaa.hex": "signed VAA (13 dev-guardian signatures, quorum 13)",
+    "match-outcome-v1.json": "conformance vector this run reproduces byte-for-byte",
+    "fixture-982341.json": "deterministic TxLINE-style fixture recording"
+  }
+}

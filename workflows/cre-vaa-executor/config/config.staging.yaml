@@ -1,0 +1,30 @@
+# Staging config — real 30s heartbeat. The VAA source stays the dev-guardian
+# signer in this build (the live Guardian network cannot observe a simulated
+# Solana emitter); flip kind to wormholescan/guardian-rpc with a real locator
+# once a real Solana emission exists. Secrets are names only.
+mode: simulation
+runId: staging
+runDir: ../../../evidence/runs/staging
+
+heartbeat:
+  intervalMs: 30000
+
+vaaSource:
+  kind: dev-guardian-file # live example: kind: wormholescan, locator: https://api.wormholescan.io
+  locator: ../../../evidence/runs/staging/vaa.bin
+
+txoracleProgramId: 9ExbZjAapQww1vfcisDmrngPinHTEfpjYRWMunJgcKaA
+
+receiver:
+  chainId: 84532
+  deployment: base-sepolia
+  contract: wormholeOutcomeReceiver
+  rpcUrlEnv: BASE_RPC_URL
+
+market:
+  settle: true
+  deployment: base-sepolia
+  contract: demoPredictionMarket
+
+forwarder:
+  privateKeySecret: FORWARDER_PRIVATE_KEY

@@ -1,0 +1,30 @@
+# CRE workflow manifest — proofline-vaa-executor.
+#
+# HONESTY NOTE: written to the CRE programming model but in THIS BUILD it
+# executes via a LOCAL SIMULATION runner (`pnpm tsx main.ts --config
+# config/config.local.yaml`) — no deployed DON. The VAA "source" polled in
+# local/staging configs is the DEV GUARDIAN SET signer (13-of-19 real
+# secp256k1 signatures over the real Wormhole digest, keys derived from
+# public strings) — NOT the live Guardian network, which can never observe
+# our simulated Solana emitter. See workflows/README-workflows.md.
+name: proofline-vaa-executor
+description: >
+  Proof lane (Level 4): reads the Solana Wormhole emitter+sequence from the
+  source-dispatch handoff, builds the canonical MatchOutcomeV1 payload
+  (byte-for-byte against the conformance vector), polls the configured VAA
+  source for the signed VAA, decodes and validates the header locally
+  (13-of-19 quorum), then produces a CRE report whose payload is the EXACT
+  VAA bytes for WormholeOutcomeReceiver on Base. Confirms OutcomeImported
+  and optionally triggers DemoPredictionMarket.settle(). CRE provides
+  liveness; Wormhole provides correctness — submitVaa stays permissionless.
+entrypoint: main.ts
+configs:
+  local: config/config.local.yaml
+  staging: config/config.staging.yaml
+triggers:
+  - id: heartbeat
+    type: cron
+    schedule: "*/30 * * * * *"
+secrets:
+  # Names only — never values.
+  - FORWARDER_PRIVATE_KEY

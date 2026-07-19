@@ -1,0 +1,16 @@
+# Derived from workflows/cre-source-dispatch/config/config.live-base.yaml by relay-fixture
+# (only runId/runDir/paths changed).
+mode: simulation
+runId: live-base-1
+runDir: evidence/runs/live-base-1
+fixture:
+  source: file
+  path: packages/test-vectors/fixture-982341.json
+  fixtureId: "982341"
+heartbeat:
+  intervalMs: 250
+  maxTicks: 6
+proofBuffer:
+  chunkSize: 256
+secrets:
+  - TXLINE_API_KEY

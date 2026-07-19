@@ -1,0 +1,25 @@
+# CRE workflow manifest — proofline-level3-attestor.
+#
+# HONESTY NOTE: written to the CRE programming model but in THIS BUILD it
+# executes via a LOCAL SIMULATION runner (`pnpm tsx main.ts --config
+# config/config.local.yaml`) — no deployed DON, and the three RPC "providers"
+# in local/staging configs are deterministic recorded responders, not live
+# Solana RPCs. See workflows/README-workflows.md.
+name: proofline-level3-attestor
+description: >
+  Fast lane (Level 3): builds the canonical TxOracle validate_stat_v2
+  simulateTransaction, submits the identical serialized transaction to three
+  independent Solana RPC providers, requires a 2-of-3 quorum on STABLE
+  OUTPUTS ONLY, then produces the ABI-encoded Level 3 report for
+  CRELevel3Receiver on Base. Anti-spoofing checks per design §3.4.
+entrypoint: main.ts
+configs:
+  local: config/config.local.yaml
+  staging: config/config.staging.yaml
+triggers:
+  - id: heartbeat
+    type: cron
+    schedule: "*/30 * * * * *"
+secrets:
+  # Names only — never values.
+  - FORWARDER_PRIVATE_KEY

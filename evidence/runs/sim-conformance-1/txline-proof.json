@@ -1,0 +1,8 @@
+{
+  "proof": {
+    "synthetic": true,
+    "note": "deterministic demo fixture"
+  },
+  "rootAccount": "7dai1yRoots1111111111111111111111111111111",
+  "strategy": "validate_stat_v2 exact-equality predicate"
+}

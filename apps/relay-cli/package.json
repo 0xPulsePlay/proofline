@@ -1,0 +1,28 @@
+{
+  "name": "@proofline/relay-cli",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "relay-fixture": "tsx src/relay-fixture.ts",
+    "capture-run": "tsx src/capture-run.ts",
+    "replay-run": "tsx src/replay-run.ts",
+    "verify-evidence": "tsx src/verify-evidence.ts",
+    "gen-demo-run": "tsx src/gen-demo-run.ts"
+  },
+  "dependencies": {
+    "@proofline/config": "workspace:*",
+    "@proofline/event-model": "workspace:*",
+    "@proofline/protocol": "workspace:*",
+    "@proofline/solana-sdk": "workspace:*",
+    "@proofline/txline-sdk": "workspace:*",
+    "@proofline/wormhole-sdk": "workspace:*",
+    "viem": "^2.21.0",
+    "yaml": "^2.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "typescript": "^5.6.0",
+    "tsx": "^4.19.0"
+  }
+}

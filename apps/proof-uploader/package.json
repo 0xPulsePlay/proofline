@@ -1,0 +1,27 @@
+{
+  "name": "@proofline/proof-uploader",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./adapter": "./src/proof-buffer-adapter.ts",
+    "./chunk-proof": "./src/chunk-proof.ts",
+    "./seal-proof": "./src/seal-proof.ts",
+    "./cleanup": "./src/cleanup.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "chunk": "tsx src/chunk-proof.ts",
+    "seal": "tsx src/seal-proof.ts",
+    "cleanup": "tsx src/cleanup.ts"
+  },
+  "dependencies": {
+    "@proofline/protocol": "workspace:*",
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

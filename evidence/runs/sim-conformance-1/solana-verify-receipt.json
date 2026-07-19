@@ -1,0 +1,17 @@
+{
+  "simulated": true,
+  "note": "Solana leg SIMULATED in this build — file-backed ProofBuffer + sim: signatures; no transaction was broadcast.",
+  "bufferAddress": "sim:proofbuffer:afd600ce6fed",
+  "sealSignature": "sim:seal:470715cebd1e3d12",
+  "verifyCommandSignature": "sim:verify-command:7cd2cb2489caf631",
+  "verifyCommand": {
+    "kind": "verify_outcome",
+    "proofBuffer": "sim:proofbuffer:afd600ce6fed",
+    "expectedHash": "0xc6c0ff5b7a44b9bf60292160dcfdde2f78f9354a062ac01d26e21acbeed264d7",
+    "fixtureId": "982341",
+    "sequence": "184",
+    "dailyRootAccount": "7dai1yRoots1111111111111111111111111111111",
+    "strategy": "validate_stat_v2 exact-equality predicate",
+    "simulated": true
+  }
+}
