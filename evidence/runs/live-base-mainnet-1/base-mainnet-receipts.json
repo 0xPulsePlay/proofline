@@ -1,0 +1,12 @@
+{
+  "schema": "proofline-base-mainnet-receipts-v1",
+  "chainId": 8453,
+  "explorerBaseUrl": "https://basescan.org",
+  "note": "Base MAINNET deployment + exercised dual-finality run (recorded fixture 982341, labeled demo; dev guardian set — same trust model as the Sepolia leg, labeled everywhere). Event ledger for this run was not captured due to an operator-side pipe kill mid-run; the on-chain receipts below are the authoritative record.",
+  "deployBroadcast": "contracts/base/broadcast/Deploy.s.sol/8453/run-latest.json",
+  "level3OnReport": "0x85cbc2740836b13c8a372377c786c34a4d14cbd2bbe5ff978442af726d098581",
+  "level4SubmitVaa": "0xbe0944a86a9c74b5ec1919a7813a344a0257aca9d18cf33e6326a63065c6284e",
+  "marketSettle": "0x5b9c16cd139e9ea6250b44525bfe681f2f42d201c6e432899e26d2a81ed8f03d",
+  "attestationId": "0x062f6f5c62639f0267c364f320c828e2967022fcde4e1df4f3f1f8ce53061d6d",
+  "registryStatusAfter": "DualFinalized (3)"
+}

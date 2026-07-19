@@ -225,7 +225,7 @@ async function main(): Promise<void> {
           registryAddress
         ) {
           const account = privateKeyToAccount(forwarderKey as `0x${string}`);
-          const { publicClient, chain } = makeClients(rpcUrl);
+          const { publicClient, chain } = makeClients(rpcUrl, config.receiver.chainId);
           const wallet = createWalletClient({ account, chain, transport: http(rpcUrl) });
           log.info("resuming finalize/settle for already-submitted VAA", { txHash: state.txHash });
           const fin = await finalizeOnBase({
@@ -461,7 +461,7 @@ async function main(): Promise<void> {
         // LIVE mode — permissionless submitVaa via @proofline/evm-sdk, then
         // read the registry back for the REAL dual-finality state.
         const account = privateKeyToAccount(forwarderKey as `0x${string}`);
-        const { publicClient, chain } = makeClients(rpcUrl);
+        const { publicClient, chain } = makeClients(rpcUrl, config.receiver.chainId);
         const wallet = createWalletClient({ account, chain, transport: http(rpcUrl) });
         txHash = await sendSubmitVaa(wallet, receiverAddress as `0x${string}`, vaaHex);
         const receipt = await publicClient.waitForTransactionReceipt({ hash: txHash as `0x${string}` });

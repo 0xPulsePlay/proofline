@@ -9,14 +9,20 @@
  *    this package never reads deployment files itself.
  */
 import { createPublicClient, http } from "viem";
-import { baseSepolia } from "viem/chains";
+import { base, baseSepolia } from "viem/chains";
 
 export * from "./registry";
 export * from "./receivers";
 export * from "./market";
 
-/** Public (read) client for Base Sepolia (chain 84532). */
-export function makeClients(rpcUrl: string) {
-  const publicClient = createPublicClient({ chain: baseSepolia, transport: http(rpcUrl) });
-  return { publicClient, chain: baseSepolia };
+/**
+ * Public (read) client for a Base chain. Defaults to Base Sepolia (84532);
+ * pass chainId 8453 for Base mainnet. Any other id is refused — these are
+ * the only two chains this stack deploys to.
+ */
+export function makeClients(rpcUrl: string, chainId: number = baseSepolia.id) {
+  const chain = chainId === base.id ? base : chainId === baseSepolia.id ? baseSepolia : undefined;
+  if (!chain) throw new Error(`unsupported chainId ${chainId} (expected 8453 or 84532)`);
+  const publicClient = createPublicClient({ chain, transport: http(rpcUrl) });
+  return { publicClient, chain };
 }

@@ -409,7 +409,7 @@ async function main(): Promise<void> {
       if (config.mode === "live" && rpcUrl && forwarderKey && receiverAddress) {
         // LIVE mode — deliver via the forwarder EOA through @proofline/evm-sdk.
         const account = privateKeyToAccount(forwarderKey as `0x${string}`);
-        const { publicClient, chain } = makeClients(rpcUrl);
+        const { publicClient, chain } = makeClients(rpcUrl, config.receiver.chainId);
         const wallet = createWalletClient({ account, chain, transport: http(rpcUrl) });
         txHash = await sendLevel3Report(wallet, receiverAddress as `0x${string}`, reportHex);
         await publicClient.waitForTransactionReceipt({ hash: txHash as `0x${string}` });

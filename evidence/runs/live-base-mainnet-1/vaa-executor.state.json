@@ -1,0 +1,7 @@
+{
+  "phase": "submitted",
+  "attestationId": "0x062f6f5c62639f0267c364f320c828e2967022fcde4e1df4f3f1f8ce53061d6d",
+  "txHash": "0xbe0944a86a9c74b5ec1919a7813a344a0257aca9d18cf33e6326a63065c6284e",
+  "dualFinalized": true,
+  "settleTxHash": "0x5b9c16cd139e9ea6250b44525bfe681f2f42d201c6e432899e26d2a81ed8f03d"
+}

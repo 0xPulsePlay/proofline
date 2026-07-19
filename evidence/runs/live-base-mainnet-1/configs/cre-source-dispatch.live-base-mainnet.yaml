@@ -1,0 +1,16 @@
+# Derived from workflows/cre-source-dispatch/config/config.live-base-mainnet.yaml by relay-fixture
+# (only runId/runDir/paths changed).
+mode: simulation
+runId: live-base-mainnet-1
+runDir: /home/claude/.world/groups/wos-company/proofline/workspace/proofline-full-deploy/evidence/runs/live-base-mainnet-1
+fixture:
+  source: file
+  path: /home/claude/.world/groups/wos-company/proofline/workspace/proofline-full-deploy/packages/test-vectors/fixture-982341.json
+  fixtureId: "982341"
+heartbeat:
+  intervalMs: 250
+  maxTicks: 6
+proofBuffer:
+  chunkSize: 256
+secrets:
+  - TXLINE_API_KEY

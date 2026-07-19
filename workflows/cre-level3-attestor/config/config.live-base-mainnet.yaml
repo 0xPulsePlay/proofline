@@ -1,0 +1,38 @@
+# Local simulation config — deterministic recorded RPC responders.
+mode: live
+runId: live-base-mainnet-1
+runDir: ../../../evidence/runs/live-base-mainnet-1
+
+heartbeat:
+  intervalMs: 250 # accelerated for local simulation; staging/workflow.yaml use 30s
+  maxTicks: 8
+
+# The identical serialized transaction goes to every provider; agreement is
+# judged on STABLE OUTPUTS ONLY. mode: simulated providers are deterministic
+# local responders returning the recorded result (slots / compute units differ
+# per provider on purpose, to prove the stable-outputs-only comparison).
+rpcProviders:
+  - name: rpc-a
+    url: sim://recorded/rpc-a
+    mode: simulated
+  - name: rpc-b
+    url: sim://recorded/rpc-b
+    mode: simulated
+  - name: rpc-c
+    url: sim://recorded/rpc-c
+    mode: simulated
+
+quorum: 2
+
+txoracleProgramId: 9ExbZjAapQww1vfcisDmrngPinHTEfpjYRWMunJgcKaA
+
+receiver:
+  chainId: 8453
+  # Address resolves from packages/config/deployments/base-sepolia.json when
+  # present; empty means sim mode prints calldata and hands off.
+  deployment: base-mainnet
+  contract: creLevel3Receiver
+  rpcUrlEnv: BASE_RPC_URL
+
+forwarder:
+  privateKeySecret: FORWARDER_PRIVATE_KEY
