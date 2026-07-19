@@ -48,7 +48,7 @@
    "network": "wormhole",
    "status": "confirmed",
    "txHash": "htbc11WxKJvnMbXFsRQkRHsVJ94mxnnMDcvyPjB1oeyug7KbDCAYSxvxX2Ca9Cwzb3u24xka9BV1egHVhRMChR6",
-   "timestampMs": 1784499000000,
+   "timestampMs": 1784499094000,
    "explorerUrl": "https://explorer.solana.com/tx/htbc11WxKJvnMbXFsRQkRHsVJ94mxnnMDcvyPjB1oeyug7KbDCAYSxvxX2Ca9Cwzb3u24xka9BV1egHVhRMChR6",
    "detail": "Parallel wormhole-enabled deployment (program 34vPxZ79ENBhEaTn5SCC65J91zSXNKxTmcJe6YD7oRAv, same verified source, new id): publish_outcome through the real core bridge, ~6 min after the whistle \u2014 real Wormhole guardian VAA over the live attestation (guardian set 7, 13 signatures, emitter seq 1, 1,091-byte VAA, 176-byte MatchOutcomeV1 payload byte-equal to the on-chain outcome).",
    "vaaUrl": "https://api.wormholescan.io/api/v1/vaas/1/c6a1fe20518b7dffed790c41cdd9a33d6df614f02dfe4d7a17bc9904d51ff4b9/1",
