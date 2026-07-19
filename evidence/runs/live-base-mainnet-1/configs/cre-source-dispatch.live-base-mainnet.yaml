@@ -2,10 +2,10 @@
 # (only runId/runDir/paths changed).
 mode: simulation
 runId: live-base-mainnet-1
-runDir: /home/claude/.world/groups/wos-company/proofline/workspace/proofline-full-deploy/evidence/runs/live-base-mainnet-1
+runDir: evidence/runs/live-base-mainnet-1
 fixture:
   source: file
-  path: /home/claude/.world/groups/wos-company/proofline/workspace/proofline-full-deploy/packages/test-vectors/fixture-982341.json
+  path: packages/test-vectors/fixture-982341.json
   fixtureId: "982341"
 heartbeat:
   intervalMs: 250
