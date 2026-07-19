@@ -14,7 +14,7 @@ FEE_ALLOWANCE_LAMPORTS=10000000
 MEMO_RESERVE_LAMPORTS=50000000
 PRIORITY_FEE_MICROLAMPORTS=10000
 SO_PATH=$ADAPTER_ROOT/target/deploy/proofline_adapter.so
-D2_PROGRAM_KEYPAIR=/home/claude/.world/groups/wos-company/proofline/workspace/proofline/programs/proofline-adapter/target/deploy/proofline_adapter-keypair.json
+D2_PROGRAM_KEYPAIR=${D2_PROGRAM_KEYPAIR:-$ADAPTER_ROOT/target/deploy/proofline_adapter-keypair.json}
 TRANSCRIPT=${D2_TRANSCRIPT:-$ADAPTER_ROOT/target/d2-mainnet-transcript.log}
 EVIDENCE=$REPO_ROOT/evidence/mainnet/full-deploy/d2-mainnet.json
 

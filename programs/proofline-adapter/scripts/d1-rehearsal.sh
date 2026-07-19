@@ -9,8 +9,8 @@ TXLINE_PROGRAM_DATA=8DCh33bPSZrJojZTLoZ7Briaw21tY2m15xNpTxudjxgS
 DAILY_ROOT=CdrFdcGqLpGxq3qDxcj4aNQT8jsUU2vBHd3JEEAQ55jd
 MAINNET_RPC=${D1_MAINNET_RPC:-https://api.mainnet-beta.solana.com}
 
-# This repository has no .world/ports.yml. Per the port-for fallback rule,
-# use an overridable 38xxx backend range and fail loudly on collisions.
+# No port-registry file in this repository; fall back to
+# an overridable 38xxx range and fail loudly on collisions.
 RPC_PORT=${D1_RPC_PORT:-38990}
 WEBSOCKET_PORT=$((RPC_PORT + 1))
 FAUCET_PORT=${D1_FAUCET_PORT:-39021}
