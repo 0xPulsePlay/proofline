@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-19T00:00:00Z",
+  "fixture": {
+    "id": "18257739",
+    "matchup": "Spain v Argentina",
+    "competition": "FIFA World Cup Final"
+  },
+  "rehearsal": {
+    "label": "Rehearsed end-to-end today against yesterday's completed fixture",
+    "fixtureId": "18257865",
+    "network": "Base Sepolia",
+    "l3ReportTx": "0xe56cb36573c2cab029104169a6b1fb61ff19e8ce1d187bf49a6bb07d1be72511",
+    "vaaImportTx": "0xefe795060532be34a1ca98df05001b469166d8ec983c9afd97aac8e3b0ba225b",
+    "status": "DualFinalized"
+  },
+  "entries": [
+    {
+      "id": "live-attestation",
+      "label": "Live attestation — the proven path",
+      "description": "Client-verified by TxLINE's deployed mainnet verifier against its real mainnet root, then immutably attested by Proofline on Solana mainnet.",
+      "network": "solana",
+      "status": "pending",
+      "txHash": null,
+      "timestampMs": null,
+      "explorerUrl": null
+    },
+    {
+      "id": "base-mainnet-delivery",
+      "label": "Base mainnet in-match delivery",
+      "description": "L3 report → DualFinalized → settle() on the freshly deployed final market.",
+      "network": "base-mainnet",
+      "market": "0x421aAeDA48899FA16Fb32B189532f47a3190ACd4",
+      "status": "pending",
+      "txHash": null,
+      "timestampMs": null,
+      "explorerUrl": null
+    },
+    {
+      "id": "guardian-vaa",
+      "label": "Real-guardian Wormhole VAA",
+      "description": "13-of-19 real Wormhole guardian quorum, verified on-chain via ecrecover — in flight.",
+      "network": "wormhole",
+      "status": "pending",
+      "txHash": null,
+      "timestampMs": null,
+      "explorerUrl": null
+    }
+  ]
+}

@@ -41,6 +41,12 @@ export default function Home() {
               tamper lab — every attack fails with the contract&apos;s real error
             </span>
           </Link>
+          <Link href="/story" className="cta">
+            📖 Read the submission story
+            <span className="tiny" style={{ display: "block", opacity: 0.8 }}>
+              the pitch, the architecture, and what&apos;s real on mainnet today
+            </span>
+          </Link>
         </div>
         <div className="hero-path mono tiny dim">
           TxLINE → Solana <span className="badge-sim">sim</span> → Wormhole 13/19{" "}
