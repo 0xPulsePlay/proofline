@@ -1,0 +1,10 @@
+{
+  "kind": "verify_outcome",
+  "proofBuffer": "sim:proofbuffer:76b40655bc55",
+  "expectedHash": "0xd393edd710dcac8b57e6579e384f506b5dc43874f778621e0ad1ae8b3a290935",
+  "fixtureId": "18257865",
+  "sequence": "1195",
+  "dailyRootAccount": "99AGbM7C8WwiT1PsNkZ7D2Zfsw892kgYs9wWGzCmFVqY",
+  "strategy": "validate_stat_v2 exact-equality predicate",
+  "simulated": true
+}

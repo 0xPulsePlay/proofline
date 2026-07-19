@@ -1,0 +1,16 @@
+# Derived from workflows/cre-source-dispatch/config/config.live-final-mainnet.yaml by relay-fixture
+# (only runId/runDir/paths changed).
+mode: live
+runId: live-final-mainnet
+runDir: evidence/runs/live-final-mainnet
+fixture:
+  source: txline-api
+  path: packages/test-vectors/fixture-template-18257739.json
+  fixtureId: "18257739"
+heartbeat:
+  intervalMs: 30000
+  maxTicks: 6
+proofBuffer:
+  chunkSize: 256
+secrets:
+  - TXLINE_API_TOKEN

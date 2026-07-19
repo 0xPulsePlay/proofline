@@ -56,6 +56,7 @@ import {
   decodeValidateStatV2Transaction,
   creReport,
   extractStableOutputs,
+  fetchFixtureState,
   loadWorkflowConfig,
   lookupDailyRootPda,
   parseValidateStatV2Data,
@@ -89,6 +90,14 @@ interface Level3AttestorConfig {
   receiver: { chainId: number; deployment: string; contract: string; rpcUrlEnv?: string };
   forwarder: { privateKeySecret: string };
   coordinatorUrl?: string;
+  /**
+   * Optional live TxLINE ingestion (mirrors cre-source-dispatch's fixture
+   * block). When source is "txline-api", Level 3 independently re-fetches the
+   * live fixture state from the API instead of trusting the packager's file —
+   * same anti-spoofing stance as the recorded branch, same shared code path
+   * (fetchFixtureState).
+   */
+  fixture?: { source: "file" | "txline-api"; path?: string; fixtureId?: string };
 }
 
 /** Handoff written by cre-source-dispatch to <runDir>/handoff.json. */
@@ -232,13 +241,25 @@ async function main(): Promise<void> {
         return "done";
       }
 
-      // Re-read the recorded fixture ourselves — Level 3 must not trust the
+      // Re-read the fixture ourselves — Level 3 must not trust the
       // packager beyond what it can independently re-verify (§3.4 item 5).
+      // Live mode re-fetches from the TxLINE API through the same
+      // fetchFixtureState path source-dispatch used, so both lanes derive
+      // from the source, not from each other.
       const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
       const fixtureFile = isAbsolute(handoff.fixturePath)
         ? handoff.fixturePath
         : join(repoRoot, handoff.fixturePath);
-      const fixture = JSON.parse(readFileSync(fixtureFile, "utf8")) as FixtureState;
+      const fixture =
+        config.fixture?.source === "txline-api"
+          ? (
+              await fetchFixtureState({
+                source: "txline-api",
+                fixturePath: fixtureFile,
+                fixtureId: config.fixture.fixtureId ?? handoff.fixtureId,
+              })
+            ).state
+          : (JSON.parse(readFileSync(fixtureFile, "utf8")) as FixtureState);
       const finalRecord = fixture.records.find(
         (r) =>
           r.action === FINAL_MARKER.action &&

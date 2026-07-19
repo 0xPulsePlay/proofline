@@ -1,0 +1,31 @@
+# Derived from workflows/cre-level3-attestor/config/config.live-final-rehearsal.yaml by relay-fixture
+# (only runId/runDir/paths changed).
+mode: live
+runId: live-final-rehearsal5
+runDir: evidence/runs/live-final-rehearsal5
+heartbeat:
+  intervalMs: 250
+  maxTicks: 8
+rpcProviders:
+  - name: rpc-a
+    url: sim://recorded/rpc-a
+    mode: simulated
+  - name: rpc-b
+    url: sim://recorded/rpc-b
+    mode: simulated
+  - name: rpc-c
+    url: sim://recorded/rpc-c
+    mode: simulated
+quorum: 2
+txoracleProgramId: 9ExbZjAapQww1vfcisDmrngPinHTEfpjYRWMunJgcKaA
+receiver:
+  chainId: 84532
+  deployment: base-sepolia
+  contract: creLevel3Receiver
+  rpcUrlEnv: BASE_RPC_URL
+forwarder:
+  privateKeySecret: FORWARDER_PRIVATE_KEY
+fixture:
+  source: txline-api
+  path: packages/test-vectors/fixture-template-18257865.json
+  fixtureId: "18257865"

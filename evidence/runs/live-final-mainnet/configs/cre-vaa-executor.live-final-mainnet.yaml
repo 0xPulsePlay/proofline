@@ -1,0 +1,27 @@
+# Derived from workflows/cre-vaa-executor/config/config.live-final-mainnet.yaml by relay-fixture
+# (only runId/runDir/paths changed).
+mode: live
+runId: live-final-mainnet
+runDir: evidence/runs/live-final-mainnet
+heartbeat:
+  intervalMs: 250
+  maxTicks: 8
+vaaSource:
+  kind: dev-guardian-file
+  locator: evidence/runs/live-final-mainnet/vaa.bin
+txoracleProgramId: 9ExbZjAapQww1vfcisDmrngPinHTEfpjYRWMunJgcKaA
+receiver:
+  chainId: 8453
+  deployment: base-mainnet
+  contract: wormholeOutcomeReceiver
+  rpcUrlEnv: BASE_RPC_URL
+market:
+  settle: true
+  deployment: base-mainnet
+  contract: demoPredictionMarket
+forwarder:
+  privateKeySecret: FORWARDER_PRIVATE_KEY
+fixture:
+  source: txline-api
+  path: packages/test-vectors/fixture-template-18257739.json
+  fixtureId: "18257739"

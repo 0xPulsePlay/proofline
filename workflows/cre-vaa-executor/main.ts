@@ -70,6 +70,7 @@ import {
   createEventSink,
   cronHeartbeat,
   creReport,
+  fetchFixtureState,
   loadWorkflowConfig,
   lookupDailyRootPda,
   readJsonFile,
@@ -103,6 +104,8 @@ interface VaaExecutorConfig {
   market?: { settle: boolean; deployment: string; contract: string };
   forwarder: { privateKeySecret: string };
   coordinatorUrl?: string;
+  /** Optional live TxLINE ingestion — same contract as cre-level3-attestor. */
+  fixture?: { source: "file" | "txline-api"; path?: string; fixtureId?: string };
 }
 
 /** Handoff written by cre-source-dispatch to <runDir>/handoff.json. */
@@ -264,7 +267,18 @@ async function main(): Promise<void> {
       const fixtureFile = isAbsolute(handoff.fixturePath)
         ? handoff.fixturePath
         : join(repoRoot, handoff.fixturePath);
-      const fixture = JSON.parse(readFileSync(fixtureFile, "utf8")) as FixtureState;
+      // Live mode independently re-fetches from the TxLINE API (same shared
+      // fetchFixtureState path as source-dispatch / level3-attestor).
+      const fixture =
+        config.fixture?.source === "txline-api"
+          ? (
+              await fetchFixtureState({
+                source: "txline-api",
+                fixturePath: fixtureFile,
+                fixtureId: config.fixture.fixtureId ?? handoff.fixtureId,
+              })
+            ).state
+          : (JSON.parse(readFileSync(fixtureFile, "utf8")) as FixtureState);
       const finalRecord = fixture.records.find(
         (r) =>
           r.action === FINAL_MARKER.action &&

@@ -1,0 +1,29 @@
+# LIVE TxLINE ingestion config — real free-tier API (verified 2026-07-19
+# against World Cup Final fixture 18257739, Spain v Argentina).
+#
+# Score records are REAL (guest JWT + X-Api-Token two-header auth via
+# @proofline/txline-sdk). The recorded fixture file below is used ONLY as the
+# proof-leg template (root PDA / wormhole / strategy — fields the free tier
+# does not expose); the SDK labels those fields synthetic. Requires
+# TXLINE_API_TOKEN or TXLINE_API_TOKEN_FILE in the environment.
+#
+# Pre-match this correctly holds in IN_PLAY/no-action (§3.6 discipline: no
+# writes without a game_finalised record + proof).
+mode: live
+runId: live-final-mainnet
+runDir: ../../../evidence/runs/live-final-mainnet
+
+fixture:
+  source: txline-api
+  path: ../../../packages/test-vectors/fixture-template-18257739.json
+  fixtureId: "18257739"
+
+heartbeat:
+  intervalMs: 30000
+  maxTicks: 6
+
+proofBuffer:
+  chunkSize: 256
+
+secrets:
+  - TXLINE_API_TOKEN

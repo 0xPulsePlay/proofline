@@ -1,0 +1,16 @@
+# Derived from workflows/cre-source-dispatch/config/config.live-final-rehearsal.yaml by relay-fixture
+# (only runId/runDir/paths changed).
+mode: live
+runId: live-final-rehearsal5
+runDir: evidence/runs/live-final-rehearsal5
+fixture:
+  source: txline-api
+  path: packages/test-vectors/fixture-template-18257865.json
+  fixtureId: "18257865"
+heartbeat:
+  intervalMs: 30000
+  maxTicks: 6
+proofBuffer:
+  chunkSize: 256
+secrets:
+  - TXLINE_API_TOKEN

@@ -1,0 +1,42 @@
+# Local simulation config — dev-guardian VAA source, accelerated clock.
+mode: live
+runId: live-final-rehearsal
+runDir: ../../../evidence/runs/live-final-rehearsal
+
+heartbeat:
+  intervalMs: 250 # accelerated for local simulation; staging/workflow.yaml use 30s
+  maxTicks: 8
+
+# VAA source polling — the polling contract is identical to Wormholescan /
+# guardian-RPC polling; in this build the source is the dev-guardian signer
+# writing vaa.bin into the run dir (simulated and labeled everywhere).
+vaaSource:
+  kind: dev-guardian-file
+  locator: ../../../evidence/runs/live-final-rehearsal/vaa.bin
+
+txoracleProgramId: 9ExbZjAapQww1vfcisDmrngPinHTEfpjYRWMunJgcKaA
+
+receiver:
+  chainId: 84532
+  # Address resolves from packages/config/deployments/base-sepolia.json when
+  # present; empty means sim mode prints calldata and hands off.
+  deployment: base-sepolia
+  contract: wormholeOutcomeReceiver
+  rpcUrlEnv: BASE_RPC_URL
+
+market:
+  # true: after dual finality, settle DemoPredictionMarket (sim mode emits a
+  # simulated CONSUMER_SETTLED; live mode calls the permissionless settle()).
+  settle: true
+  deployment: base-sepolia
+  contract: demoPredictionMarket
+
+forwarder:
+  privateKeySecret: FORWARDER_PRIVATE_KEY
+
+# Live TxLINE ingestion — this lane independently re-fetches the fixture from
+# the API (template supplies proof-leg fields, labeled synthetic).
+fixture:
+  source: txline-api
+  path: ../../../packages/test-vectors/fixture-template-18257865.json
+  fixtureId: "18257865"

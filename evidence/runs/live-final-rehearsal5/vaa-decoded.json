@@ -1,0 +1,111 @@
+{
+  "simulatedLeg": "dev-guardian-set (real signature math, simulated observation)",
+  "vaaHash": "0x3c00fe32751773ff118457197fca7595c9971a1d478038243a473cd83b73b3fd",
+  "signingDigest": "0xda341b54eddb1a73784eee281c9a045da449ef06b0bb2c921260ff3535a6575d",
+  "version": 1,
+  "guardianSetIndex": 0,
+  "signatures": [
+    {
+      "guardianIndex": 0,
+      "r": "0x2d5a79d65816324f6df43fdebf02042144b23f6b05c6288977f8460cdc5918db",
+      "s": "0x2c60a5ca740b784f3825ecf13fcb40a700b2fdddd379fa18ca5ea73ba85c94a0",
+      "v": 0
+    },
+    {
+      "guardianIndex": 1,
+      "r": "0x4516e05d09fcd4d9afbde8a860e68f019116065da659426a4747a50c9bef9997",
+      "s": "0x1788e5ffb95d8ba9dfc34830aaee32be04d659cb67d98e2955084da1177e6421",
+      "v": 1
+    },
+    {
+      "guardianIndex": 2,
+      "r": "0x735302b2172316367ee7d390bd8493f80d32224230a978bc15ddb03d57806da2",
+      "s": "0x0e39e7a992df4137b5b51008ac688d8bb93348aa07c837502b359b3f2dae6042",
+      "v": 0
+    },
+    {
+      "guardianIndex": 4,
+      "r": "0x868c9955e6819ff5ac51b27f0e2ad7d2fad02ca619019de42b3736a32e635ddd",
+      "s": "0x3910ba144ae06dcdf3d3d4ac2aeca93325881dc9f19f0102565483c46de61633",
+      "v": 0
+    },
+    {
+      "guardianIndex": 5,
+      "r": "0x3137dd316e4284d141f72e245603b1f817bc6994017d35f8f054a39faebf0298",
+      "s": "0x54ed5c006f94f9ee2ec8f570c83bd470f5cfbe06c2ce3b9c78a299a333c19aa9",
+      "v": 0
+    },
+    {
+      "guardianIndex": 7,
+      "r": "0x5394ad2e03927ea9d610a1dca939461b8455530342d2459399b6a5b1528f4455",
+      "s": "0x64b08952b019f8023e797d02c0e1e4640fc966832b5f59526c7f5e8f6a0ceb6d",
+      "v": 1
+    },
+    {
+      "guardianIndex": 8,
+      "r": "0x6126306f0e62f0a1c05cf78ecb825719d7bdf8ef4832e5cdce17946b4d011b35",
+      "s": "0x7c30922b036ce8d507b08ef547e1b7ff4472607aba1efbbfe5fd4e3547ad14d0",
+      "v": 0
+    },
+    {
+      "guardianIndex": 10,
+      "r": "0xe5f5e30848a8e24d0c4ce616dded3ec11f4a966e12e687a4b70319e538bd0ac6",
+      "s": "0x7b996344f535a1fe4bd986bcc12016e1ceb7b6a1b282223f38bb9db08bbf372b",
+      "v": 0
+    },
+    {
+      "guardianIndex": 11,
+      "r": "0xa9935549d8b5bdc8a94c43cb3ebc9b4d7da87103d64adc421a17ddeacd814e49",
+      "s": "0x6fc88660fce3b796a39c32c54326d11de648233de078571f49866aa32706b218",
+      "v": 1
+    },
+    {
+      "guardianIndex": 13,
+      "r": "0x43a92847bfe8dcb45e87f3bf09826001f1aaa8cf96bbfbb10c0da25a03b35e8b",
+      "s": "0x2328b46aaf1ebb03076728feeaa39bb5094881e88c6d30da4ef3c5198fdb2452",
+      "v": 0
+    },
+    {
+      "guardianIndex": 15,
+      "r": "0x1b67f5288b9e645197e228ff27dcf62d316ba7bdf9b21fbe30b4c2417654dd16",
+      "s": "0x50e7ce9b5e6c33b46497346d997cd41594024b853dd1884d6983b087c52667d5",
+      "v": 0
+    },
+    {
+      "guardianIndex": 16,
+      "r": "0xd16f45df3fced6c1f413ac7f649bce98713ca1382c8712f05028a3466b45e99c",
+      "s": "0x307e1940846c35cd08c97471d976134ff4be5c93f8873b0fd96432b5abe17d9a",
+      "v": 1
+    },
+    {
+      "guardianIndex": 18,
+      "r": "0xd7ad3d7a27c140354cbea58a9df623c8a0b130240f2f9d603d5f85624284598e",
+      "s": "0x4596fe7170e67f6b10df536444040b6eb67aaf4bfca659ae596af5710da5dc91",
+      "v": 1
+    }
+  ],
+  "timestamp": 1784416014,
+  "nonce": 0,
+  "emitterChainId": 1,
+  "emitterAddress": "0x000044ba2902cccc6eee24233bc4173704b97b786a006b7bf66d25fc00000000",
+  "sequence": "18257865",
+  "consistencyLevel": 1,
+  "payloadHex": "0x5052464c010100002714020300000000011697c900000000000004ab0000019f777b91f70000006400000004000000067a70e89067f323972a7ca9ce81003e1be5bcf568d87286a332da3b7a81920dd378f49f476f7a28780652b47119002e9af1f4a4fcc3b2ffe7d052bd4850ed307fa197e27032b19ab4e61cde7b98fa71d24662706767a48894fcb9d9ad910814bad393edd710dcac8b57e6579e384f506b5dc43874f778621e0ad1ae8b3a290935",
+  "decodedOutcome": {
+    "flags": 0,
+    "destinationChain": 10004,
+    "sourceValidationVersion": 2,
+    "result": 3,
+    "fixtureId": "18257865",
+    "scoreSequence": "1195",
+    "proofTimestampMs": "1784416014839",
+    "period": 100,
+    "participant1Score": 4,
+    "participant2Score": 6,
+    "txlineProgramId": "0x7a70e89067f323972a7ca9ce81003e1be5bcf568d87286a332da3b7a81920dd3",
+    "dailyRootAccount": "0x78f49f476f7a28780652b47119002e9af1f4a4fcc3b2ffe7d052bd4850ed307f",
+    "validationInstructionHash": "0xa197e27032b19ab4e61cde7b98fa71d24662706767a48894fcb9d9ad910814ba",
+    "proofBundleHash": "0xd393edd710dcac8b57e6579e384f506b5dc43874f778621e0ad1ae8b3a290935"
+  },
+  "attestationId": "0xae73bd9b5c9d33164e6840c9ffe79c3eb1699aef163cf881d40796199dbb2e0e"
+}

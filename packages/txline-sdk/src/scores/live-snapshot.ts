@@ -64,6 +64,10 @@ function probeNumber(bags: Array<Record<string, unknown> | undefined>, keys: str
 function statusIdFor(ev: RawScoreEvent): number {
   const explicit = probeNumber([ev.Data, ev.Stats], ["StatusId", "statusId"]);
   if (explicit !== undefined) return explicit;
+  // Observed live (fixture 18257865, 2026-07-19): the settlement event arrives
+  // as Action="game_finalised" with GameState still "scheduled" and empty
+  // Data — in the live vocabulary the ACTION is the finalisation signal.
+  if (ev.Action === "game_finalised") return 100;
   switch (ev.GameState) {
     case "finished":
     case "finalised":
@@ -76,18 +80,29 @@ function statusIdFor(ev: RawScoreEvent): number {
   }
 }
 
+/** Period in the recorded vocabulary; game_finalised settles as period 100. */
+function periodFor(ev: RawScoreEvent): number {
+  const explicit = probeNumber([ev.Data, ev.Stats], ["Period", "period"]);
+  if (explicit !== undefined) return explicit;
+  return ev.Action === "game_finalised" ? 100 : 0;
+}
+
 /** Map one raw live event onto the recorded-fixture record shape. */
 export function mapScoreEvent(ev: RawScoreEvent): ScoreRecord {
   return {
     action: ev.Action,
     statusId: statusIdFor(ev),
-    period: probeNumber([ev.Data, ev.Stats], ["Period", "period"]) ?? 0,
+    period: periodFor(ev),
     fixtureId: String(ev.FixtureId),
     sequence: String(ev.Seq),
+    // Observed live: the Stats bag keys scores by TxLINE stat id — "1" is
+    // participant 1's score, "2" participant 2's (cross-checked against the
+    // fixture's stat-validation proof: statsToProve keys 1/2 carry the same
+    // values). Named keys win if a future shape exposes them.
     participant1Score:
-      probeNumber([ev.Data, ev.Stats], ["Participant1Score", "P1Score", "HomeScore", "Score1"]) ?? 0,
+      probeNumber([ev.Data, ev.Stats], ["Participant1Score", "P1Score", "HomeScore", "Score1", "1"]) ?? 0,
     participant2Score:
-      probeNumber([ev.Data, ev.Stats], ["Participant2Score", "P2Score", "AwayScore", "Score2"]) ?? 0,
+      probeNumber([ev.Data, ev.Stats], ["Participant2Score", "P2Score", "AwayScore", "Score2", "2"]) ?? 0,
     timestampMs: ev.Ts,
   };
 }

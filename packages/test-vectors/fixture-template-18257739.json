@@ -1,0 +1,44 @@
+{
+  "description": "WORLD CUP FINAL proof-leg template (real TxLINE root PDA for epoch day 20653; proof-leg fields remain template/synthetic-labeled)",
+  "fixtureId": "18257739",
+  "participant1": "Spain",
+  "participant2": "Argentina",
+  "competition": "FIFA World Cup \u2014 Final",
+  "records": [
+    {
+      "action": "status_update",
+      "statusId": 30,
+      "period": 2,
+      "sequence": "171",
+      "participant1Score": 2,
+      "participant2Score": 1,
+      "timestampMs": 1784497500000
+    },
+    {
+      "action": "game_finalised",
+      "statusId": 100,
+      "period": 100,
+      "sequence": "184",
+      "participant1Score": 2,
+      "participant2Score": 1,
+      "timestampMs": 1784498100000
+    }
+  ],
+  "proof": {
+    "synthetic": true,
+    "note": "deterministic demo fixture"
+  },
+  "rootAccount": "5uvGZH8yx3B9uuboWvjxZ7dEty1qgcjMayn5BFR9unjx",
+  "dailyRootPdaByEpochDay": {
+    "20653": "5uvGZH8yx3B9uuboWvjxZ7dEty1qgcjMayn5BFR9unjx"
+  },
+  "strategy": "validate_stat_v2 exact-equality predicate",
+  "proofAvailability": {
+    "ticksAfterFinalObserved": 1
+  },
+  "wormhole": {
+    "emitterBase58": "Emitter1111111111111111111111111111111111",
+    "sequence": "18257739"
+  },
+  "destinationChain": 10004
+}
