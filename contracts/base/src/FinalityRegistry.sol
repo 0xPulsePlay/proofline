@@ -49,7 +49,7 @@ contract FinalityRegistry is Ownable, ITxLineMirror {
     event Level4Reported(int64 indexed fixtureId, bytes32 indexed attestationId, uint8 result);
     event StatusChanged(int64 indexed fixtureId, FinalityStatus indexed status);
     event DualFinalized(int64 indexed fixtureId, bytes32 indexed attestationId);
-    event ConflictDetected(int64 indexed fixtureId, bytes32 level3AttestationId, bytes32 level4AttestationId);
+    event ConflictDetected(int64 indexed fixtureId, bytes32 existingAttestationId, bytes32 incomingAttestationId);
 
     error NotReporter();
     error ReportersAlreadySet();
@@ -103,7 +103,15 @@ contract FinalityRegistry is Ownable, ITxLineMirror {
         mapping(int64 => AttestationRecord) storage mine = isLevel3 ? _level3 : _level4;
         mapping(int64 => AttestationRecord) storage other = isLevel3 ? _level4 : _level3;
 
-        if (mine[fixtureId].exists) revert DuplicateReport(fixtureId);
+        if (mine[fixtureId].exists) {
+            // Same-lane re-report: identical digest is a pure duplicate;
+            // a different digest is a conflicting outcome → freeze (§3.10 item 5).
+            if (mine[fixtureId].attestationId == attestationId) revert DuplicateReport(fixtureId);
+            _status[fixtureId] = FinalityStatus.Conflict;
+            emit StatusChanged(fixtureId, FinalityStatus.Conflict);
+            emit ConflictDetected(fixtureId, mine[fixtureId].attestationId, attestationId);
+            return;
+        }
 
         mine[fixtureId] = AttestationRecord({
             attestationId: attestationId,
@@ -133,7 +141,7 @@ contract FinalityRegistry is Ownable, ITxLineMirror {
             // Freeze — never silently overwrite (§3.10 item 5).
             _status[fixtureId] = FinalityStatus.Conflict;
             emit StatusChanged(fixtureId, FinalityStatus.Conflict);
-            emit ConflictDetected(fixtureId, _level3[fixtureId].attestationId, _level4[fixtureId].attestationId);
+            emit ConflictDetected(fixtureId, other[fixtureId].attestationId, attestationId);
         }
     }
 

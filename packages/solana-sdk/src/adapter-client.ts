@@ -31,11 +31,11 @@ export interface AdapterClient {
 
 /** Deterministic simulation of the two-transaction Solana leg. */
 export class SimulatedAdapterClient implements AdapterClient {
-  constructor(
-    private opts: { emitterBase58: string; baseSlot?: number },
-  ) {}
+  private slot: number;
 
-  private slot = this.opts.baseSlot ?? 1_234_560;
+  constructor(private opts: { emitterBase58: string; baseSlot?: number }) {
+    this.slot = opts.baseSlot ?? 1_234_560;
+  }
 
   private sig(tag: string): string {
     // visibly synthetic signature — never confusable with a real one
