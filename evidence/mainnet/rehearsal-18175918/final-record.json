@@ -1,0 +1,142 @@
+{
+  "FixtureId": 18175918,
+  "GameState": "scheduled",
+  "StartTime": 1783116000000,
+  "IsTeam": true,
+  "FixtureGroupId": 10115677,
+  "CompetitionId": 72,
+  "CountryId": 466,
+  "SportId": 1,
+  "Participant1IsHome": true,
+  "Participant2Id": 1051,
+  "Participant1Id": 1489,
+  "CoverageSecondaryData": true,
+  "CoverageType": "TV/Stream",
+  "Action": "game_finalised",
+  "Id": 1104,
+  "Ts": 1783126189288,
+  "ConnectionId": 885,
+  "Seq": 1242,
+  "StatusId": 100,
+  "Score": {
+    "Participant1": {
+      "H1": {
+        "Goals": 1
+      },
+      "HT": {
+        "Goals": 1
+      },
+      "H2": {
+        "Corners": 5
+      },
+      "ET1": {
+        "Goals": 1,
+        "Corners": 2
+      },
+      "ET2": {
+        "Goals": 1,
+        "YellowCards": 1,
+        "Corners": 1
+      },
+      "ETTotal": {
+        "Goals": 2,
+        "YellowCards": 1,
+        "Corners": 3
+      },
+      "Total": {
+        "Goals": 3,
+        "YellowCards": 1,
+        "Corners": 8
+      }
+    },
+    "Participant2": {
+      "H2": {
+        "Goals": 1,
+        "YellowCards": 1,
+        "Corners": 2
+      },
+      "ET1": {
+        "Goals": 1,
+        "Corners": 3
+      },
+      "ET2": {
+        "Corners": 3
+      },
+      "ETTotal": {
+        "Goals": 1,
+        "Corners": 6
+      },
+      "Total": {
+        "Goals": 2,
+        "YellowCards": 1,
+        "Corners": 8
+      }
+    }
+  },
+  "Stats": {
+    "1": 3,
+    "2": 2,
+    "3": 1,
+    "4": 1,
+    "5": 0,
+    "6": 0,
+    "7": 8,
+    "8": 8,
+    "1001": 1,
+    "1002": 0,
+    "1003": 0,
+    "1004": 0,
+    "1005": 0,
+    "1006": 0,
+    "1007": 0,
+    "1008": 0,
+    "2001": 1,
+    "2002": 0,
+    "2003": 0,
+    "2004": 0,
+    "2005": 0,
+    "2006": 0,
+    "2007": 0,
+    "2008": 0,
+    "3001": 0,
+    "3002": 1,
+    "3003": 0,
+    "3004": 1,
+    "3005": 0,
+    "3006": 0,
+    "3007": 5,
+    "3008": 2,
+    "4001": 1,
+    "4002": 1,
+    "4003": 0,
+    "4004": 0,
+    "4005": 0,
+    "4006": 0,
+    "4007": 2,
+    "4008": 3,
+    "5001": 1,
+    "5002": 0,
+    "5003": 1,
+    "5004": 0,
+    "5005": 0,
+    "5006": 0,
+    "5007": 1,
+    "5008": 3,
+    "6001": 0,
+    "6002": 0,
+    "6003": 0,
+    "6004": 0,
+    "6005": 0,
+    "6006": 0,
+    "6007": 0,
+    "6008": 0,
+    "7001": 2,
+    "7002": 1,
+    "7003": 1,
+    "7004": 0,
+    "7005": 0,
+    "7006": 0,
+    "7007": 3,
+    "7008": 6
+  }
+}

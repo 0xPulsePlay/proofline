@@ -34,6 +34,7 @@ export function TopBar() {
         <Link href="/control-room">Control room</Link>
         <Link href="/tamper-lab">Tamper lab</Link>
         <Link href="/integrations">Integrations</Link>
+        <Link href="/mainnet">Mainnet</Link>
         {manifest && <Link href={`/matches/${manifest.fixture.fixtureId}`}>Match</Link>}
       </nav>
       <label className="toggle">
