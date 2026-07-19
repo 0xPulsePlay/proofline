@@ -6,7 +6,7 @@ export function TopBar() {
   const { mode, setMode, liveAvailable, expert, setExpert, manifest } = useRun();
   return (
     <div className="topbar">
-      <Link href="/" className="brand" style={{ color: "var(--text)" }}>
+      <Link href="/" className="brand">
         PROOF<span>LINE</span>
       </Link>
       <div className="mode-group" role="tablist" aria-label="mode">
@@ -29,8 +29,8 @@ export function TopBar() {
           Replay of a recorded execution against Base Sepolia — real timestamps, real transactions.
         </span>
       )}
-      <div style={{ flex: 1 }} />
-      <nav className="small" style={{ display: "flex", gap: 14 }}>
+      <div className="spacer" />
+      <nav className="small navlinks">
         <Link href="/control-room">Control room</Link>
         <Link href="/tamper-lab">Tamper lab</Link>
         <Link href="/integrations">Integrations</Link>

@@ -51,9 +51,9 @@ export function ReplayBar() {
         </label>
       </div>
       {boundaryNote && (
-        <div className="inset small" style={{ marginTop: 8, borderColor: "var(--provisional)" }}>
+        <div className="inset small mt-2" style={{ borderColor: "var(--provisional)" }}>
           <strong>Verification boundary.</strong> <span className="dim">{boundaryNote}</span>{" "}
-          <button className="ctl" onClick={play} style={{ marginLeft: 8 }}>continue ▶</button>
+          <button className="ctl ml-2" onClick={play}>continue ▶</button>
         </div>
       )}
     </div>

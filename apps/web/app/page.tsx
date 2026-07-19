@@ -8,8 +8,8 @@ export default function Home() {
     <div className="shell landing">
       <div className="topbar">
         <span className="brand">PROOF<span>LINE</span></span>
-        <div style={{ flex: 1 }} />
-        <nav className="small" style={{ display: "flex", gap: 14 }}>
+        <div className="spacer" />
+        <nav className="small navlinks">
           <Link href="/control-room">Control room</Link>
           <Link href="/tamper-lab">Tamper lab</Link>
           <Link href="/integrations">Integrations</Link>
@@ -23,7 +23,7 @@ export default function Home() {
           <br />
           Settled <span className="hl">everywhere.</span>
         </h1>
-        <p className="dim" style={{ maxWidth: 640, fontSize: 17 }}>
+        <p className="dim hero-lead">
           TxLINE commits scores to Solana. Proofline verifies them with TxLINE&apos;s own on-chain
           verifier, carries the outcome across Wormhole, and finalizes on Base — two independent
           lanes racing to the same digest. A relayer can delay an outcome; it cannot change one.
@@ -31,13 +31,13 @@ export default function Home() {
         <div className="hero-cta">
           <Link href="/control-room" className="cta primary">
             ▶ Watch the Finality Control Room
-            <span className="tiny" style={{ display: "block", opacity: 0.8 }}>
+            <span className="tiny cta-sub">
               replay of a recorded run — {f.participant1} {f.participant1Score}–{f.participant2Score} {f.participant2}
             </span>
           </Link>
           <Link href="/tamper-lab" className="cta">
             ⚔ Try to forge a result
-            <span className="tiny" style={{ display: "block", opacity: 0.8 }}>
+            <span className="tiny cta-sub">
               tamper lab — every attack fails with the contract&apos;s real error
             </span>
           </Link>
@@ -46,7 +46,7 @@ export default function Home() {
           TxLINE → Solana <span className="badge-sim">sim</span> → Wormhole 13/19{" "}
           <span className="badge-sim">dev set</span> → Chainlink CRE{" "}
           <span className="badge-sim">local</span> → Base Sepolia{" "}
-          <span className="chip ok" style={{ fontSize: 10 }}>REAL</span>
+          <span className="chip ok sm">REAL</span>
         </div>
         <p className="tiny faint">
           Dual finality: fast lane (RPC quorum, provisional) and proof lane (Wormhole VAA) must

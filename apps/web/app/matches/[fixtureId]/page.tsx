@@ -13,10 +13,10 @@ export default async function MatchPage({ params }: { params: Promise<{ fixtureI
   return (
     <div className="shell">
       <div className="topbar">
-        <Link href="/" className="brand" style={{ color: "var(--text)" }}>PROOF<span>LINE</span></Link>
+        <Link href="/" className="brand">PROOF<span>LINE</span></Link>
         <span className="small dim">Match view</span>
-        <div style={{ flex: 1 }} />
-        <nav className="small" style={{ display: "flex", gap: 14 }}>
+        <div className="spacer" />
+        <nav className="small navlinks">
           <Link href="/control-room">Control room</Link>
           <Link href="/tamper-lab">Tamper lab</Link>
           <Link href="/integrations">Integrations</Link>
@@ -24,7 +24,7 @@ export default async function MatchPage({ params }: { params: Promise<{ fixtureI
       </div>
 
       {!known ? (
-        <div className="panel" style={{ marginTop: 16 }}>
+        <div className="panel mt-4">
           <h3>Unknown fixture</h3>
           <p className="small dim">
             Fixture <span className="mono">{fixtureId}</span> is not part of the bundled demo data.
@@ -41,34 +41,34 @@ export default async function MatchPage({ params }: { params: Promise<{ fixtureI
             </span>
             <span className="final-tag">FINAL</span>
             <span className="badge-sim">synthetic fixture</span>
-            <span style={{ flex: 1 }} />
+            <span className="spacer" />
             <span className="tiny dim">{fx.competition} · fixture {fx.fixtureId}</span>
           </div>
 
           <div className="panel">
             <h3>TxLINE record timeline (deterministic recording)</h3>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <div className="stack-sm">
               {fx.records.map((r) => (
-                <div key={r.sequence} className="inset" style={{ display: "flex", gap: 14, alignItems: "baseline", flexWrap: "wrap" }}>
+                <div key={r.sequence} className="inset row-base">
                   <span className="mono tiny faint">{new Date(r.timestampMs).toISOString()}</span>
-                  <span className="mono small" style={{ color: r.action === "game_finalised" ? "var(--ok)" : "var(--text)" }}>
+                  <span className={`mono small ${r.action === "game_finalised" ? "text-ok" : "hi"}`}>
                     {r.action}
                   </span>
                   <span className="mono tiny dim">
                     status {r.statusId} · period {r.period} · seq {r.sequence} · score {r.participant1Score}–{r.participant2Score}
                   </span>
                   {r.action === "game_finalised" && (
-                    <span className="chip ok" style={{ fontSize: 10 }}>FINAL marker (status 100 / period 100)</span>
+                    <span className="chip ok sm">FINAL marker (status 100 / period 100)</span>
                   )}
                 </div>
               ))}
             </div>
-            <p className="tiny faint" style={{ margin: "10px 0 0" }}>
+            <p className="tiny faint mt-2">
               {fx.description}
             </p>
           </div>
 
-          <div className="two-col" style={{ marginTop: 14 }}>
+          <div className="two-col mt-4">
             <div className="panel">
               <h3>Commitment</h3>
               <dl className="kv">
@@ -81,8 +81,8 @@ export default async function MatchPage({ params }: { params: Promise<{ fixtureI
             </div>
             <div className="panel">
               <h3>Outcome on Base</h3>
-              <p className="small dim" style={{ margin: 0 }}>
-                Result: <strong style={{ color: "var(--text)" }}>{f.participant1} wins {f.participant1Score}–{f.participant2Score}</strong>
+              <p className="small dim m-0">
+                Result: <strong className="hi">{f.participant1} wins {f.participant1Score}–{f.participant2Score}</strong>
                 <br />
                 Attestation:{" "}
                 <Link className="mono" href={`/attestations/${demoManifest.attestationId}`}>
@@ -99,7 +99,7 @@ export default async function MatchPage({ params }: { params: Promise<{ fixtureI
                   {shortHex(deployment.contracts.demoPredictionMarket)} ↗
                 </a>
               </p>
-              <p className="small" style={{ marginTop: 10 }}>
+              <p className="small mt-2">
                 <Link href="/control-room">watch this outcome relay in the control room →</Link>
               </p>
             </div>

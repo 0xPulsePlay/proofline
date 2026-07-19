@@ -59,8 +59,7 @@ interface Broadcast {
 function Hex({ value }: { value: string }) {
   return (
     <code
-      className="mono tiny"
-      style={{ cursor: "pointer", wordBreak: "break-all" }}
+      className="mono tiny hexwrap click-copy"
       title="click to copy"
       onClick={() => navigator.clipboard?.writeText(value)}
     >
@@ -127,22 +126,22 @@ export default function MainnetPage() {
   return (
     <div className="shell">
       <div className="topbar">
-        <Link href="/" className="brand" style={{ color: "var(--text)" }}>
+        <Link href="/" className="brand">
           PROOF<span>LINE</span>
         </Link>
         <span className="small dim">Solana mainnet evidence — client-verified + memo-anchored</span>
-        <div style={{ flex: 1 }} />
-        <nav className="small" style={{ display: "flex", gap: 14 }}>
+        <div className="spacer" />
+        <nav className="small navlinks">
           <Link href="/control-room">Control room</Link>
           <Link href="/tamper-lab">Tamper lab</Link>
           <Link href="/integrations">Integrations</Link>
         </nav>
       </div>
 
-      <div className="panel" style={{ marginTop: 16, maxWidth: 860 }}>
+      <div className="panel mt-4" style={{ maxWidth: 860 }}>
         <h3>What this evidence is (and is not)</h3>
-        <p className="small dim" style={{ marginTop: 6 }}>
-          <strong style={{ color: "var(--text)" }}>
+        <p className="small dim mt-2">
+          <strong className="hi">
             Real TxLINE data, client-verified by TxLINE&apos;s deployed mainnet verifier against its
             real mainnet root, then immutably attested by Proofline on Solana mainnet
           </strong>{" "}
@@ -155,13 +154,13 @@ export default function MainnetPage() {
       </div>
 
       {d2 && (
-        <div className="panel" style={{ marginTop: 12, maxWidth: 860 }}>
+        <div className="panel mt-4" style={{ maxWidth: 860 }}>
           <h3>
             Deployed program — ON-CHAIN verification{" "}
-            <span className="chip ok" style={{ fontSize: 10, marginLeft: 8 }}>SOLANA MAINNET</span>
+            <span className="chip ok sm ml-2">SOLANA MAINNET</span>
           </h3>
-          <p className="small dim" style={{ margin: "6px 0 10px" }}>
-            The Proofline adapter program is <strong style={{ color: "var(--text)" }}>deployed on
+          <p className="small dim panel-intro">
+            The Proofline adapter program is <strong className="hi">deployed on
             Solana mainnet</strong> and executed <code className="mono">verify_outcome</code> as a
             real transaction: a CPI into the deployed TxLINE program verified the Merkle proof
             against the real mainnet daily root and returned exact <code className="mono">true</code> —
@@ -175,7 +174,7 @@ export default function MainnetPage() {
               {d2.transactions.verifyOutcome.signature.slice(0, 20)}…
             </a>{" "}
             · slot {d2.transactions.verifyOutcome.slot} · {d2.transactions.verifyOutcome.computeUnitsConsumed} CU · TxLINE return{" "}
-            <span className="chip ok" style={{ fontSize: 10 }}>true</span>
+            <span className="chip ok sm">true</span>
             <br />
             VerifiedOutcome PDA{" "}
             <a href={d2.explorer.verifiedOutcome} target="_blank" rel="noreferrer">
@@ -190,7 +189,7 @@ export default function MainnetPage() {
         </div>
       )}
       {runs.length === 0 && (
-        <div className="panel" style={{ marginTop: 12 }}>
+        <div className="panel mt-4">
           <p className="small dim">No mainnet evidence bundles published yet.</p>
         </div>
       )}
@@ -198,45 +197,45 @@ export default function MainnetPage() {
         const d = data[run.id];
         if (!d)
           return (
-            <div key={run.id} className="panel" style={{ marginTop: 12 }}>
+            <div key={run.id} className="panel mt-4">
               <p className="tiny dim">loading {run.label}…</p>
             </div>
           );
         const m = d.manifest;
         const scores = m.stats.filter((s) => s.key === 1 || s.key === 2).map((s) => s.value);
         return (
-          <div key={run.id} className="panel" style={{ marginTop: 12, maxWidth: 860 }}>
+          <div key={run.id} className="panel mt-4" style={{ maxWidth: 860 }}>
             <h3>
               {run.label}{" "}
-              <span className={`chip ${m.mode === "live-final" ? "ok" : "active"}`} style={{ fontSize: 10, marginLeft: 8 }}>
+              <span className={`chip ${m.mode === "live-final" ? "ok" : "active"} sm ml-2`}>
                 {m.mode === "live-final" ? "LIVE FINAL" : "REHEARSAL"}
               </span>
             </h3>
-            <div className="tiny dim" style={{ margin: "6px 0 10px" }}>
+            <div className="tiny dim panel-intro">
               fixture <span className="mono">{m.fixtureId}</span> · seq {m.seq} · scores {scores.join("–")} · result{" "}
-              <strong style={{ color: "var(--text)" }}>{m.result}</strong> · proofTs {new Date(m.proofTsMs).toISOString()}
+              <strong className="hi">{m.result}</strong> · proofTs {new Date(m.proofTsMs).toISOString()}
             </div>
 
             <div className="tiny dim">Deployed-verifier results (read-only .view, finalized commitment)</div>
             {m.views.map((v) => (
-              <div key={v.endpoint} className="tiny mono" style={{ marginTop: 4 }}>
+              <div key={v.endpoint} className="tiny mono mt-1">
                 {v.endpoint.replace("https://", "")} · slot {v.slot} ·{" "}
                 {v.returned ? (
-                  <span className="chip ok" style={{ fontSize: 10 }}>returned TRUE</span>
+                  <span className="chip ok sm">returned TRUE</span>
                 ) : (
-                  <span className="chip fail" style={{ fontSize: 10 }}>NOT TRUE</span>
+                  <span className="chip fail sm">NOT TRUE</span>
                 )}
               </div>
             ))}
 
-            <div className="tiny dim" style={{ marginTop: 10 }}>Mainnet daily-root account (finalized, both RPCs)</div>
-            <div className="tiny mono" style={{ marginTop: 4 }}>
+            <div className="tiny dim mt-2">Mainnet daily-root account (finalized, both RPCs)</div>
+            <div className="tiny mono mt-1">
               PDA <Hex value={m.rootPda} /> · owner = TxLINE program · data sha256{" "}
               <Hex value={(m.rootReads[0]?.dataSha256 ?? "").slice(0, 24) + "…"} />
             </div>
 
-            <div className="tiny dim" style={{ marginTop: 10 }}>Bound digests</div>
-            <div className="tiny" style={{ marginTop: 4 }}>
+            <div className="tiny dim mt-2">Bound digests</div>
+            <div className="tiny mt-1">
               instruction (pinned IDL <span className="mono">{m.txlineIdlCommit.slice(0, 8)}…</span>): <Hex value={m.ixHash} />
               <br />
               evidence bundle: <Hex value={m.bundleHash} />
@@ -250,18 +249,15 @@ export default function MainnetPage() {
 
             {d.memo && (
               <>
-                <div className="tiny dim" style={{ marginTop: 10 }}>
+                <div className="tiny dim mt-2">
                   Memo attestation{" "}
                   {d.broadcast?.signature ? "(broadcast, finalized)" : "(built + dry-run validated; broadcast pending authorization)"}
                 </div>
-                <div
-                  className="tiny mono"
-                  style={{ wordBreak: "break-all", background: "rgba(255,255,255,0.04)", padding: 8, borderRadius: 6, marginTop: 4 }}
-                >
+                <div className="tiny mono inset hexwrap mt-1">
                   {d.memo.memo}
                 </div>
                 {d.broadcast?.signature && (
-                  <p className="tiny" style={{ marginTop: 6 }}>
+                  <p className="tiny mt-2">
                     <a href={`https://explorer.solana.com/tx/${d.broadcast.signature}`} target="_blank" rel="noreferrer">
                       View the finalized transaction on Solana Explorer ↗
                     </a>
@@ -273,7 +269,7 @@ export default function MainnetPage() {
         );
       })}
 
-      <div className="panel" style={{ marginTop: 12, maxWidth: 860 }}>
+      <div className="panel mt-4" style={{ maxWidth: 860 }}>
         <p className="tiny dim">
           Reproduce: <code className="mono">pnpm --filter @proofline/mainnet-attestor rehearse</code> — the evidence
           bundle (raw verbatim proof response, exact instruction bytes, canonical strategy, finalisation record) ships

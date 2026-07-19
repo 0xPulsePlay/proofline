@@ -56,9 +56,9 @@ export function ProofDerivation({
   return (
     <div className="panel">
       <h3>
-        Proof path — real derivations <span className="chip ok" style={{ fontSize: 10 }}>REAL keccak256</span>
+        Proof path — real derivations <span className="chip ok sm">REAL keccak256</span>
       </h3>
-      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+      <div className="stack-sm">
         <Row
           label="proof bundle hash"
           formula="keccak256(canonical evidence bundle)"
@@ -83,7 +83,7 @@ export function ProofDerivation({
           pendingNote="derived independently by both lanes"
         />
       </div>
-      <p className="tiny faint" style={{ margin: "10px 0 0" }}>
+      <p className="tiny faint mt-2">
         Values reproduce the conformance vector byte-for-byte; the Base contracts derive the same
         attestation id on-chain from the VAA payload.
       </p>

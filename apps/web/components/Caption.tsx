@@ -18,7 +18,7 @@ export function Caption() {
   return (
     <div className="caption">
       {EXPLAIN[last.event.type]}
-      {last.simulated && <span className="badge-sim" style={{ marginLeft: 8 }}>simulated leg</span>}
+      {last.simulated && <span className="badge-sim ml-2">simulated leg</span>}
     </div>
   );
 }

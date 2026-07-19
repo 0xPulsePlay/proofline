@@ -20,10 +20,10 @@ function Stage({
     <div className="wire-stage">
       <div className="t">
         <strong>{name}</strong>
-        {sim ? <span className="badge-sim">{sim}</span> : <span className="chip ok" style={{ fontSize: 10 }}>REAL</span>}
+        {sim ? <span className="badge-sim">{sim}</span> : <span className="chip ok sm">REAL</span>}
       </div>
       <div className="tiny dim">{role}</div>
-      {children && <div className="tiny mono" style={{ marginTop: 6 }}>{children}</div>}
+      {children && <div className="tiny mono mt-2">{children}</div>}
     </div>
   );
 }
@@ -40,17 +40,17 @@ export default function IntegrationsPage() {
   return (
     <div className="shell">
       <div className="topbar">
-        <Link href="/" className="brand" style={{ color: "var(--text)" }}>PROOF<span>LINE</span></Link>
+        <Link href="/" className="brand">PROOF<span>LINE</span></Link>
         <span className="small dim">Integrations — how the pieces wire together</span>
-        <div style={{ flex: 1 }} />
-        <nav className="small" style={{ display: "flex", gap: 14 }}>
+        <div className="spacer" />
+        <nav className="small navlinks">
           <Link href="/control-room">Control room</Link>
           <Link href="/tamper-lab">Tamper lab</Link>
           <Link href={`/matches/${demoManifest.fixture.fixtureId}`}>Match</Link>
         </nav>
       </div>
 
-      <div className="panel" style={{ marginTop: 16 }}>
+      <div className="panel mt-4">
         <h3>Wiring diagram</h3>
         <div className="wire">
           <Stage name="TxLINE / TxODDS" role="originates sports data; commits Merkle roots on Solana" sim="recorded fixture">
@@ -73,13 +73,13 @@ export default function IntegrationsPage() {
             chain id {deployment.chainId}
           </Stage>
         </div>
-        <p className="tiny faint" style={{ margin: "10px 0 0" }}>
+        <p className="tiny faint mt-2">
           Two lanes feed the registry: Level 3 (RPC-quorum fast lane, provisional) and Level 4
           (Wormhole-verified proof lane). Settlement requires both to derive the same attestation id.
         </p>
       </div>
 
-      <div className="panel" style={{ marginTop: 14 }}>
+      <div className="panel mt-4">
         <h3>Deployed contracts — Base Sepolia (REAL, verify on BaseScan)</h3>
         <table className="data">
           <thead>
@@ -88,7 +88,7 @@ export default function IntegrationsPage() {
           <tbody>
             {contractRows.map(([name, key, addr, role]) => (
               <tr key={name}>
-                <td className="mono small" style={{ whiteSpace: "nowrap" }}>{name}</td>
+                <td className="mono small nowrap">{name}</td>
                 <td>
                   <a className="mono tiny" href={explorerAddress(addr)} target="_blank" rel="noreferrer">
                     {addr} ↗
@@ -107,21 +107,21 @@ export default function IntegrationsPage() {
             ))}
           </tbody>
         </table>
-        <dl className="kv" style={{ marginTop: 12 }}>
+        <dl className="kv mt-3">
           <dt>registered emitter</dt><dd>{deployment.registeredEmitter}</dd>
           <dt>guardian quorum</dt><dd>{deployment.quorum} of {deployment.guardianSet.length}</dd>
           <dt>forwarder (demo EOA)</dt><dd>{deployment.forwarder}</dd>
         </dl>
       </div>
 
-      <div className="panel" style={{ marginTop: 14 }}>
+      <div className="panel mt-4">
         <h3>Consume it from any Base contract</h3>
-        <pre className="inset mono small" style={{ overflowX: "auto", margin: 0 }}>{`(bool finalized, uint8 result) =
+        <pre className="inset mono small pre-block">{`(bool finalized, uint8 result) =
     proofline.finalOutcome(fixtureId);
 
 require(finalized, "Outcome not finalized");
 // result: 1 = HOME, 2 = DRAW, 3 = AWAY`}</pre>
-        <p className="tiny faint" style={{ margin: "8px 0 0" }}>
+        <p className="tiny faint mt-2">
           Proofline is a reusable cross-chain sports-finality primitive; the demo market is one
           consumer, not the product.
         </p>

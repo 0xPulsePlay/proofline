@@ -15,10 +15,10 @@ export default async function AttestationPage({ params }: { params: Promise<{ id
   return (
     <div className="shell">
       <div className="topbar">
-        <Link href="/" className="brand" style={{ color: "var(--text)" }}>PROOF<span>LINE</span></Link>
+        <Link href="/" className="brand">PROOF<span>LINE</span></Link>
         <span className="small dim">Attestation detail</span>
-        <div style={{ flex: 1 }} />
-        <nav className="small" style={{ display: "flex", gap: 14 }}>
+        <div className="spacer" />
+        <nav className="small navlinks">
           <Link href="/control-room">Control room</Link>
           <Link href="/tamper-lab">Tamper lab</Link>
           <Link href="/integrations">Integrations</Link>
@@ -26,7 +26,7 @@ export default async function AttestationPage({ params }: { params: Promise<{ id
       </div>
 
       {!known || !d ? (
-        <div className="panel" style={{ marginTop: 16 }}>
+        <div className="panel mt-4">
           <h3>Unknown attestation</h3>
           <p className="small dim">
             <span className="mono">{id}</span> is not part of the bundled demo data. The demo run&apos;s
@@ -78,7 +78,7 @@ function AttestationDetail() {
   return (
     <>
       <div className="scoreline">
-        <span className="teams" style={{ fontSize: 26 }}>
+        <span className="teams sub">
           {f.participant1} <span className="score">{f.participant1Score}</span>
           <span className="dim"> — </span>
           <span className="score">{f.participant2Score}</span> {f.participant2}
@@ -88,10 +88,10 @@ function AttestationDetail() {
       </div>
       <div className="panel">
         <h3>Attestation id</h3>
-        <div className="mono small" style={{ wordBreak: "break-all" }}>
+        <div className="mono small hexwrap">
           <CopyHex value={d.attestationId} head={20} tail={12} label="attestation id" />
         </div>
-        <p className="tiny faint" style={{ margin: "8px 0 0" }}>
+        <p className="tiny faint mt-2">
           keccak256(domainSeparator ‖ sourceEmitter ‖ fixtureId ‖ scoreSequence ‖
           validationInstructionHash ‖ proofBundleHash) — conformance-asserted against{" "}
           <span className="mono">match-outcome-v1.json</span> (vector value{" "}
@@ -99,15 +99,15 @@ function AttestationDetail() {
         </p>
       </div>
 
-      <div className="two-col" style={{ marginTop: 14 }}>
+      <div className="two-col mt-4">
         <div className="panel">
           <h3>Payload — MatchOutcomeV1 (176 bytes, REAL)</h3>
           <table className="data"><tbody>
             {payloadRows.map(([k, v]) => (
-              <tr key={k}><td className="dim" style={{ whiteSpace: "nowrap" }}>{k}</td><td className="mono">{v}</td></tr>
+              <tr key={k}><td className="dim nowrap">{k}</td><td className="mono">{v}</td></tr>
             ))}
           </tbody></table>
-          <div style={{ marginTop: 10 }}>
+          <div className="mt-2">
             <span className="tiny faint">encoded payload </span>
             <CopyHex value={d.payloadHex} head={18} label="payload hex" />
           </div>
@@ -116,7 +116,7 @@ function AttestationDetail() {
           <h3>Committed hashes</h3>
           <dl className="kv">
             {hashRows.map(([k, v]) => (
-              <div key={k} style={{ display: "contents" }}>
+              <div key={k} className="contents">
                 <dt>{k}</dt>
                 <dd>{v.startsWith("0x") ? <CopyHex value={v} label={k} /> : v}</dd>
               </div>
@@ -125,12 +125,12 @@ function AttestationDetail() {
         </div>
       </div>
 
-      <div className="panel" style={{ marginTop: 14 }}>
+      <div className="panel mt-4">
         <h3>Two independent derivation paths — the dual-finality trick</h3>
         <div className="two-col">
           <div className="inset">
             <div className="small"><strong>Level 3 — fast lane</strong> <span className="badge-sim">simulated leg</span></div>
-            <p className="tiny dim" style={{ margin: "6px 0 0" }}>
+            <p className="tiny dim mt-2">
               Three independent RPC providers simulate the TxOracle validation; the CRE workflow
               reports the outcome to{" "}
               <a href={explorerAddress(deployment.contracts.creLevel3Receiver)} target="_blank" rel="noreferrer" className="mono">
@@ -140,8 +140,8 @@ function AttestationDetail() {
             </p>
           </div>
           <div className="inset">
-            <div className="small"><strong>Level 4 — proof lane</strong> <span className="chip ok" style={{ fontSize: 10 }}>real math</span></div>
-            <p className="tiny dim" style={{ margin: "6px 0 0" }}>
+            <div className="small"><strong>Level 4 — proof lane</strong> <span className="chip ok sm">real math</span></div>
+            <p className="tiny dim mt-2">
               The signed VAA ({d.guardianIndices?.length ?? 13} dev-guardian signatures) is delivered to{" "}
               <a href={explorerAddress(deployment.contracts.wormholeOutcomeReceiver)} target="_blank" rel="noreferrer" className="mono">
                 WormholeOutcomeReceiver ↗
@@ -154,7 +154,7 @@ function AttestationDetail() {
             </p>
           </div>
         </div>
-        <p className="small" style={{ margin: "12px 0 0", color: "var(--ok)" }}>
+        <p className="small mt-3 text-ok">
           Digest equality of the two derivations is exactly what{" "}
           <a href={explorerAddress(deployment.contracts.finalityRegistry)} target="_blank" rel="noreferrer" className="mono">
             FinalityRegistry ↗
@@ -162,7 +162,7 @@ function AttestationDetail() {
           requires for DUAL FINALIZED.
         </p>
       </div>
-      <p className="small" style={{ marginTop: 14 }}>
+      <p className="small mt-4">
         <Link href={`/matches/${f.fixtureId}`}>← match timeline</Link>
         <span className="dim"> · </span>
         <Link href="/control-room">watch the run in the control room →</Link>

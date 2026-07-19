@@ -43,9 +43,9 @@ function ScenarioCard({ s }: { s: Scenario }) {
   };
   return (
     <div className={`panel tamper ${verdict ? (verdict.accepted ? "accepted" : "rejected") : ""}`}>
-      <h3>{s.title} {s.happy && <span className="chip ok" style={{ fontSize: 10 }}>happy path</span>}</h3>
-      <p className="small dim" style={{ margin: "0 0 6px" }}>{s.summary}</p>
-      <p className="tiny faint mono" style={{ margin: "0 0 10px" }}>
+      <h3>{s.title} {s.happy && <span className="chip ok sm">happy path</span>}</h3>
+      <p className="small dim mb-2">{s.summary}</p>
+      <p className="tiny faint mono mb-3">
         {s.mutation} · VAA {s.vaaBytes.length} bytes
       </p>
       <button className="ctl" onClick={attempt} disabled={running}>
@@ -53,18 +53,18 @@ function ScenarioCard({ s }: { s: Scenario }) {
       </button>
       <AnimatePresence>
         {verdict && (
-          <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} style={{ marginTop: 12 }}>
+          <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-3">
             <div className={`verdict ${verdict.accepted ? "ok" : "bad"}`} role="status">
               {verdict.accepted ? "ACCEPTED ✓" : "REJECTED ✕"}
               {verdict.contractError && (
-                <span className="mono small" style={{ marginLeft: 10 }}>
+                <span className="mono small ml-2">
                   revert {verdict.contractError}
                 </span>
               )}
             </div>
             <CheckList verdict={verdict} />
             {verdict.accepted && verdict.attestationId && (
-              <div className="small dim" style={{ marginTop: 8 }}>
+              <div className="small dim mt-2">
                 attestation id derived on-chain:{" "}
                 <CopyHex value={verdict.attestationId} label="attestation id" />
               </div>
@@ -85,21 +85,21 @@ export default function TamperLabPage() {
   return (
     <div className="shell">
       <div className="topbar">
-        <Link href="/" className="brand" style={{ color: "var(--text)" }}>
+        <Link href="/" className="brand">
           PROOF<span>LINE</span>
         </Link>
         <span className="small dim">Tamper Lab — try to forge a result</span>
-        <div style={{ flex: 1 }} />
-        <nav className="small" style={{ display: "flex", gap: 14 }}>
+        <div className="spacer" />
+        <nav className="small navlinks">
           <Link href="/control-room">Control room</Link>
           <Link href="/integrations">Integrations</Link>
           <Link href={`/matches/${demoManifest.fixture.fixtureId}`}>Match</Link>
         </nav>
       </div>
 
-      <div className="panel" style={{ marginTop: 16 }}>
+      <div className="panel mt-4">
         <h3>How this panel works — and what is real</h3>
-        <p className="small dim" style={{ margin: 0 }}>
+        <p className="small dim m-0">
           Every scenario below builds real VAA bytes and verifies them <strong>with the same math
           the Base contract runs</strong> — signature recovery (ecrecover), 13-of-19 quorum,
           registered-emitter, payload codec, and replay checks mirror{" "}
@@ -115,16 +115,16 @@ export default function TamperLabPage() {
         </p>
       </div>
 
-      <div className="scoreline" style={{ paddingTop: 12 }}>
-        <span className="teams" style={{ fontSize: 24 }}>
+      <div className="scoreline sub">
+        <span className="teams sub">
           Original score <span className="score">2–1</span>
           <span className="dim"> · can you make Base believe </span>
-          <span style={{ color: "var(--fail)" }}>3–1</span>
+          <span className="text-fail">3–1</span>
           <span className="dim">?</span>
         </span>
       </div>
 
-      {err && <div className="panel"><p className="small" style={{ color: "var(--fail)" }}>{err}</p></div>}
+      {err && <div className="panel"><p className="small text-fail">{err}</p></div>}
       {!scenarios && !err && (
         <div className="panel"><p className="small dim">Deriving dev guardian keys and signing scenario VAAs in your browser…</p></div>
       )}
@@ -136,7 +136,7 @@ export default function TamperLabPage() {
         </div>
       )}
 
-      <p className="tiny faint" style={{ marginTop: 16 }}>
+      <p className="tiny faint mt-4">
         A relayer can delay an outcome, but it cannot change one. A proof uploader can submit
         arbitrary bytes, but the Solana adapter emits only after TxLINE&apos;s canonical verifier
         returns true. Base accepts only a valid Wormhole VAA from the registered emitter.

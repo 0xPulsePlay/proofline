@@ -22,14 +22,13 @@ export function ArtifactsPanel({ manifest }: { manifest: RunManifest }) {
         className="drawer-toggle"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        style={{ width: "100%", textAlign: "left", padding: 0 }}
       >
-        <h3 style={{ margin: 0 }}>
+        <h3 className="m-0">
           Run evidence &amp; artifacts <span className="tiny faint">{open ? "▾ hide" : "▸ show"}</span>
         </h3>
       </button>
       {open && (
-        <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 10 }}>
+        <div className="stack-md mt-2">
           {d && (
             <dl className="kv">
               <dt>payload (176 B)</dt>
@@ -45,8 +44,8 @@ export function ArtifactsPanel({ manifest }: { manifest: RunManifest }) {
             </dl>
           )}
           <div>
-            <div className="tiny faint" style={{ marginBottom: 4 }}>artifacts in this run</div>
-            <ul className="small dim" style={{ margin: 0, paddingLeft: 18 }}>
+            <div className="tiny faint mb-1">artifacts in this run</div>
+            <ul className="small dim list-indent">
               {Object.entries(manifest.artifacts).map(([file, desc]) => (
                 <li key={file}>
                   <span className="mono">{file}</span> — {desc}
@@ -55,12 +54,12 @@ export function ArtifactsPanel({ manifest }: { manifest: RunManifest }) {
             </ul>
           </div>
           <div>
-            <div className="tiny faint" style={{ marginBottom: 4 }}>
+            <div className="tiny faint mb-1">
               Base Sepolia contracts (REAL — chain id {c.chainId})
             </div>
-            <ul className="small" style={{ margin: 0, paddingLeft: 18, listStyle: "none" }}>
+            <ul className="small list-plain">
               {contracts.map(([name, addr]) => (
-                <li key={name} style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
+                <li key={name} className="row-sm">
                   <span className="dim" style={{ minWidth: 170 }}>{name}</span>
                   <a className="mono tiny" href={`${explorer}/address/${addr}`} target="_blank" rel="noreferrer">
                     {addr.slice(0, 10)}…{addr.slice(-6)} ↗

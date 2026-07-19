@@ -20,7 +20,7 @@ function Room() {
 
   if (!manifest) {
     return (
-      <div className="panel" style={{ marginTop: 20 }}>
+      <div className="panel mt-4">
         <h3>No recorded run available</h3>
         <p className="dim small">
           The control room replays recorded executions from <code>evidence/runs/</code>. Run{" "}
@@ -48,7 +48,7 @@ function Room() {
         </span>
         <span className="final-tag">FINAL</span>
         {f.synthetic && <span className="badge-sim">synthetic fixture</span>}
-        <span style={{ flex: 1 }} />
+        <span className="spacer" />
         <span className="mono tiny dim">
           Attestation{" "}
           {state.attestationId ? (
@@ -66,7 +66,7 @@ function Room() {
       <div className="room">
         <div className="stack">
           <LanesRace state={state} simulatedLegs={manifest.simulatedLegs} />
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+          <div className="two-col">
             <MerklePath state={state} expert={expert} simulated={f.synthetic} />
             <div className="panel">
               <h3>Wormhole guardians</h3>
@@ -77,7 +77,7 @@ function Room() {
                 devSet={manifest.contracts.wormholeCoreKind === "dev-guardian-set-mock"}
               />
               {state.level4.vaaHash && (
-                <div className="inset mono tiny" style={{ marginTop: 10 }}>
+                <div className="inset mono tiny mt-2">
                   <div>Fixture {f.fixtureId}</div>
                   <div>
                     {f.participant1} {f.participant1Score}–{f.participant2Score} {f.participant2}

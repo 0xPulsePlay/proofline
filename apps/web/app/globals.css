@@ -53,7 +53,45 @@ button {
   cursor: pointer;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--provisional);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .shell { max-width: 1280px; margin: 0 auto; padding: 0 20px 80px; }
+
+/* ---------- spacing + layout utilities ----------
+   Small, fixed step scale so panels/paragraphs/lists stop hand-rolling
+   one-off marginTop/gap inline style objects. Prefer these classes. */
+.spacer { flex: 1; }
+.navlinks { display: flex; gap: 14px; }
+.stack-sm { display: flex; flex-direction: column; gap: 8px; }
+.stack-md { display: flex; flex-direction: column; gap: 12px; }
+.row-sm { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.row-base { display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; }
+.contents { display: contents; }
+.hexwrap { word-break: break-all; }
+.click-copy { cursor: pointer; }
+.list-indent { margin: 0; padding-left: 18px; }
+.list-plain { margin: 0; padding-left: 18px; list-style: none; }
+.nowrap { white-space: nowrap; }
+.pre-block { overflow-x: auto; margin: 0; }
+
+.mt-1 { margin: 4px 0 0; }
+.mt-2 { margin: 8px 0 0; }
+.mt-3 { margin: 12px 0 0; }
+.mt-4 { margin: 16px 0 0; }
+.mb-1 { margin: 0 0 4px; }
+.mb-2 { margin: 0 0 8px; }
+.mb-3 { margin: 0 0 12px; }
+.ml-2 { margin-left: 8px; }
+.m-0 { margin: 0; }
+/* paragraph directly under a panel h3, followed by more in-panel content */
+.panel-intro { margin: 6px 0 10px; }
 
 /* ---------- panels ---------- */
 .panel {
@@ -83,6 +121,11 @@ button {
 .small { font-size: 12px; }
 .tiny { font-size: 11px; }
 
+/* full-bright emphasis inside a dim/muted paragraph, and semantic status text */
+.hi { color: var(--text); }
+.text-ok { color: var(--ok); }
+.text-fail { color: var(--fail); }
+
 /* ---------- status semantics: icon AND text, never color alone ---------- */
 .chip {
   display: inline-flex;
@@ -100,6 +143,8 @@ button {
 .chip.active { border-color: color-mix(in srgb, var(--provisional) 55%, transparent); color: var(--provisional); }
 .chip.fail { border-color: color-mix(in srgb, var(--fail) 55%, transparent); color: var(--fail); }
 .chip.sim { border-style: dashed; color: var(--warn); border-color: color-mix(in srgb, var(--warn) 45%, transparent); }
+/* compact inline variant — inline next to headings/labels instead of one-off fontSize overrides */
+.chip.sm { font-size: 10px; padding: 2px 8px; }
 
 .badge-sim {
   display: inline-flex;
@@ -110,7 +155,7 @@ button {
   letter-spacing: 0.08em;
   color: var(--warn);
   border: 1px dashed color-mix(in srgb, var(--warn) 50%, transparent);
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 1px 6px;
   text-transform: uppercase;
 }
@@ -128,6 +173,7 @@ button {
   font-weight: 800;
   letter-spacing: 0.22em;
   font-size: 15px;
+  color: var(--text);
 }
 .brand span { color: var(--txline); }
 
@@ -139,13 +185,16 @@ button {
   flex-wrap: wrap;
 }
 .scoreline .teams { font-size: 34px; font-weight: 750; letter-spacing: -0.01em; }
+.scoreline .teams.sub { font-size: 24px; }
 .scoreline .score { color: var(--txline); }
+/* secondary/compact scoreline used alongside .teams.sub */
+.scoreline.sub { padding-top: 12px; }
 .final-tag {
   font-family: var(--mono);
   font-size: 12px;
   padding: 3px 8px;
   border: 1px solid var(--line-strong);
-  border-radius: 5px;
+  border-radius: 6px;
   color: var(--text-dim);
 }
 
@@ -157,7 +206,7 @@ button {
 }
 
 /* ---------- mode + controls ---------- */
-.mode-group { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 7px; overflow: hidden; }
+.mode-group { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 6px; overflow: hidden; }
 .mode-group button {
   padding: 5px 12px;
   font-size: 12px;
@@ -261,7 +310,7 @@ button {
   flex: none;
   border: 1px solid var(--line);
   background: var(--bg-raise);
-  border-radius: 7px;
+  border-radius: 6px;
   padding: 6px 10px;
   font-size: 11px;
   font-family: var(--mono);
@@ -269,6 +318,7 @@ button {
   cursor: pointer;
   text-align: left;
 }
+.tl-item:hover { border-color: var(--line-strong); color: var(--text); }
 .tl-item.sel { border-color: var(--provisional); color: var(--text); }
 .tl-item .tt { color: var(--text-faint); }
 
@@ -286,6 +336,14 @@ button {
 .kv { display: grid; grid-template-columns: 130px 1fr; gap: 4px 10px; font-size: 12px; }
 .kv dt { color: var(--text-faint); }
 .kv dd { margin: 0; font-family: var(--mono); word-break: break-all; }
+
+/* ---------- evidence drawer / disclosure toggle ---------- */
+.drawer-toggle {
+  width: 100%;
+  text-align: left;
+  padding: 0;
+}
+.drawer-toggle:hover h3 { color: var(--text); }
 
 /* ---------- explain caption ---------- */
 .caption {
@@ -425,6 +483,7 @@ table.data th { color: var(--text-faint); font-weight: 500; font-size: 11px; tex
   font-weight: 800;
 }
 .landing .hl { color: var(--txline); }
+.hero-lead { max-width: 640px; font-size: 17px; }
 .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
 .cta {
   display: block;
@@ -438,6 +497,7 @@ table.data th { color: var(--text-faint); font-weight: 500; font-size: 11px; tex
 }
 .cta:hover { text-decoration: none; border-color: var(--provisional); background: var(--bg-raise); }
 .cta.primary { border-color: color-mix(in srgb, var(--ok) 50%, var(--line-strong)); }
+.cta-sub { display: block; opacity: 0.8; }
 .hero-path { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
 
 /* ---------- wiring diagram ---------- */
